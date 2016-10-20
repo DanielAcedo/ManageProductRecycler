@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.danielacedo.listproduct.interfaces.ILoginMvp;
 import com.danielacedo.listproduct.model.User;
 
 import static com.danielacedo.listproduct.R.layout.activity_login_;
@@ -76,7 +77,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
         });
 
         //Check user persistence
-        User user = ((Login_Application)getApplicationContext()).getUser();
+        User user = ((ListProduct_Application)getApplicationContext()).getUser();
         if(user != null){
             Log.d(TAG, user.getUser());
         }
@@ -94,7 +95,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
     protected void onStart(){
         super.onStart();
         //Check user persistence
-        User user = ((Login_Application)getApplicationContext()).getUser();
+        User user = ((ListProduct_Application)getApplicationContext()).getUser();
         if(user != null){
             Log.d(TAG, user.getUser());
         }

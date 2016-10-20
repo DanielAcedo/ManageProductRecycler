@@ -3,7 +3,7 @@
     package="com.danielacedo.listproduct">
 
     <application
-        android:name=".Login_Application"
+        android:name=".ListProduct_Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

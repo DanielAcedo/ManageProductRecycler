@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.danielacedo.listproduct.model.Product;
 
+/**
+ * Activity inherating from ListActivity that displays all the products in out Applicationś List
+ * @author Daniel Acedo Calderón
+ */
 public class ListProduct_Activity extends ListActivity {
-    public final static int REQUEST_CODE_ADDPRODUCT = 1;
+    public final static int REQUEST_CODE_ADDPRODUCT = 1; //Request code to start an Activity for adding products
 
     ArrayAdapter<Product> adapter;
     FloatingActionButton fab_AddProduct;
@@ -24,7 +27,7 @@ public class ListProduct_Activity extends ListActivity {
 
         //First case: Non custom Adapter
         adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1,
-                ((Login_Application)getApplication()).getProducts());
+                ((ListProduct_Application)getApplication()).getProducts());
         getListView().setAdapter(adapter);
 
 
@@ -43,9 +46,16 @@ public class ListProduct_Activity extends ListActivity {
 
     }
 
+    /**
+     * Handles callbacks for activities called with startActivityForResult
+     * @param requestCode Request code used for starting the activity
+     * @param resultCode Code sent from the started activity
+     * @param data Data sent from the started activity
+     * @author Daniel Acedo Calderón
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
+        if(requestCode == REQUEST_CODE_ADDPRODUCT && resultCode == Activity.RESULT_OK){
             adapter.notifyDataSetChanged();
         }
     }

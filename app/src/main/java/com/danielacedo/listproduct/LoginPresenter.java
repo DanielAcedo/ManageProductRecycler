@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.danielacedo.listproduct.interfaces.ILoginMvp;
 import com.danielacedo.listproduct.model.User;
 
 import java.util.regex.Pattern;
@@ -43,7 +44,7 @@ public class LoginPresenter implements ILoginMvp.Presenter {
             view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_Length), R.id.edt_Pass);
         }else{
             //Save the user in the Application class
-            ((Login_Application)((Context)view).getApplicationContext()).setUser(new User(user, pass));
+            ((ListProduct_Application)((Context)view).getApplicationContext()).setUser(new User(user, pass));
             Intent intent = new Intent((Context)view, ListProduct_Activity.class);
             ((Context) view).startActivity(intent);
         }

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.danielacedo.listproduct.interfaces.IAddProductMvp;
 import com.danielacedo.listproduct.model.Product;
 
 /**
@@ -41,7 +42,7 @@ public class AddProductPresenter implements IAddProductMvp.Presenter{
         }
         else{
             //Add the product to the Application's list
-            ((Login_Application)((Activity)view).getApplication()).saveProduct(new Product(name, description, price, brand, dosage, stock, image));
+            ((ListProduct_Application)((Activity)view).getApplication()).saveProduct(new Product(name, description, price, brand, dosage, stock, image));
             Intent intent = new Intent();
             ((Activity)view).setResult(Activity.RESULT_OK, intent);
             ((Activity)view).finish();

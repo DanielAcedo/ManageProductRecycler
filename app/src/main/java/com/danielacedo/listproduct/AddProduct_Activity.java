@@ -6,6 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.danielacedo.listproduct.interfaces.IAddProductMvp;
+
+/**
+ * Activity used for adding new products to the application. After creating one successfully it calls back ListProductActivity
+ * @author Daniel Acedo Calderón
+ */
 public class AddProduct_Activity extends AppCompatActivity implements IAddProductMvp.View{
 
     IAddProductMvp.Presenter presenter;
@@ -39,6 +45,12 @@ public class AddProduct_Activity extends AppCompatActivity implements IAddProduc
         });
     }
 
+    /**
+     * Displays error messages from the presenter in the corresponding views
+     * @param messageError The message to be displayed
+     * @param view The id of the view to be displayed
+     * @author Daniel Acedo Calderón
+     */
     @Override
     public void setMessageError(String messageError, int view) {
 

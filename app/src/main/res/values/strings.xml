@@ -16,7 +16,6 @@
     <string name="edt_Dosage">Concentración</string>
     <string name="edt_Price">Precio</string>
     <string name="edt_Stock">Existencias</string>
-    <string name="edt_Name">Nombre</string>
     <string name="edt_Image">Imagen</string>
     <string name="btn_AddProduct">Añadir</string>
 

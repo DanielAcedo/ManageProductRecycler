@@ -38,7 +38,7 @@ public class Login_Application extends Application {
         saveProduct(new Product("Virus-T", "¿Qué podría ir mal?", 25000, "Umbrella Corp.", "1", 1, R.drawable.tvirus));
     }
 
-    private void saveProduct(Product product){
+    public void saveProduct(Product product){
         productList.add(product);
     }
 

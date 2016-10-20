@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Login -->
     <string name="err_emptyData">Debe introducir un valor en el campo</string>
     <string name="err_Password_Digit">La contraseña debe tener al menos un dígito</string>
     <string name="err_Password_UpperLowerCase">La contraseña debe tener al menos una letra mayúscula y otra minúscula</string>
     <string name="err_Password_Length">La contraseña debe de tener 8 caracteres</string>
+
+    <!-- AddProduct -->
+    <string name="err_productName_empty">Debe introducir un nombre</string>
+    <string name="err_productDescription_empty">Debe introducir una descripción</string>
+    <string name="err_productBrand_empty">Debe introducir una marca</string>
+    <string name="err_productPrice_empty">Debe introducir un precio</string>
+    <string name="err_productDosage_empty">Debe introducir una concentración</string>
+    <string name="err_productStock_empty">Debe introducir las existencias</string>
+    <string name="err_productImage_empty">Debe introducir la imagen</string>
+
 </resources>

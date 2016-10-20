@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Login -->
+    <string name="app_name">LoginTextInputLayout</string>
+    <string name="txv_User">Usuario</string>
+    <string name="txv_Pass">Contraseña</string>
+    <string name="chb_Remember">Recordar</string>
+    <string name="btn_Login" translatable="false">Login</string>
+    <string name="messagePassword">Introduzca la contraseña</string>
+    <string name="messageUser">Introduzca el usuario</string>
+
+    <!-- AddProduct-->
+    <string name="edt_Name">Nombre</string>
+    <string name="edt_Description">Descripción</string>
+    <string name="edt_Brand">Marca</string>
+    <string name="edt_Dosage">Concentración</string>
+    <string name="edt_Price">Precio</string>
+    <string name="edt_Stock">Existencias</string>
+    <string name="edt_Name">Nombre</string>
+    <string name="edt_Image">Imagen</string>
+    <string name="btn_AddProduct">Añadir</string>
+
+</resources>

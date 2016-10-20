@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoginTextInputLayout</string>
+    <string name="chb_Remember">Remember</string>
+    <string name="err_Password_Digit">The password must have at least 1 digit</string>
+    <string name="err_Password_Length">The password must have a minimum of 8 characters</string>
+    <string name="err_Password_UpperLowerCase">The password must have at least one uppercase letter and one lowercase letter</string>
+    <string name="err_emptyData">You must enter a value in this field</string>
+    <string name="messagePassword">Enter the password</string>
+    <string name="messageUser">Enter the username</string>
+    <string name="txv_Pass">Password</string>
+    <string name="txv_User">User</string>
+</resources>

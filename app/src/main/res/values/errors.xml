@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="err_emptyData">Debe introducir un valor en el campo</string>
+    <string name="err_Password_Digit">La contraseña debe tener al menos un dígito</string>
+    <string name="err_Password_UpperLowerCase">La contraseña debe tener al menos una letra mayúscula y otra minúscula</string>
+    <string name="err_Password_Length">La contraseña debe de tener 8 caracteres</string>
+</resources>

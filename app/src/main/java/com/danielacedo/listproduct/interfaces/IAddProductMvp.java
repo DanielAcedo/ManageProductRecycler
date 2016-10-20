@@ -1,4 +1,4 @@
-package com.danielacedo.listproduct;
+package com.danielacedo.listproduct.interfaces;
 
 /**
  * Created by Daniel on 20/10/16.

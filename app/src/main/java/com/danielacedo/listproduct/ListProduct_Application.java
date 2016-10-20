@@ -16,7 +16,7 @@ import java.util.List;
  * Singleton application class where we place our objects available to all classes
  * @author Daniel Acedo Calderón
  */
-public class Login_Application extends Application {
+public class ListProduct_Application extends Application {
 
     private User user;
     private ArrayList<Product> productList;

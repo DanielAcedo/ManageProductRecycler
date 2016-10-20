@@ -1,11 +1,11 @@
-package com.danielacedo.listproduct;
+package com.danielacedo.listproduct.interfaces;
 
 /**
  * Created by Daniel on 6/10/16.
  */
 
 /**
- * Base interface for the MVP model, it contains all the methods necessary to implement for the components of this pattern
+ * Base interfaces for the MVP model, it contains all the methods necessary to implement for the components of this pattern
  * @author Daniel Acedo Calderón
  */
 public interface ILoginMvp {

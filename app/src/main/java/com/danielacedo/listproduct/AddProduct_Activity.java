@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.danielacedo.listproduct.interfaces.IAddProductMvp;
 
@@ -38,9 +39,11 @@ public class AddProduct_Activity extends AppCompatActivity implements IAddProduc
             @Override
             public void onClick(View v) {
                 presenter.validateProductFields(edt_Name.getText().toString(), edt_Description.getText().toString(),
-                        edt_Brand.getText().toString(), edt_Dosage.getText().toString(),
-                        Double.parseDouble(edt_Price.getText().toString()), Integer.parseInt(edt_Stock.getText().toString()),
-                        Integer.parseInt(edt_Image.getText().toString()));
+                            edt_Brand.getText().toString(), edt_Dosage.getText().toString(),
+                            edt_Price.getText().toString(), edt_Stock.getText().toString(),
+                            edt_Image.getText().toString());
+
+
             }
         });
     }
@@ -56,7 +59,10 @@ public class AddProduct_Activity extends AppCompatActivity implements IAddProduc
 
         switch (view){
             case R.id.edt_Name:
-                edt_Image.setError(messageError);
+                edt_Name.setError(messageError);
+                break;
+            case R.id.edt_Description:
+                edt_Description.setError(messageError);
                 break;
             case R.id.edt_Price:
                 edt_Price.setError(messageError);
@@ -71,7 +77,7 @@ public class AddProduct_Activity extends AppCompatActivity implements IAddProduc
                 edt_Stock.setError(messageError);
                 break;
             case R.id.edt_Image:
-                edt_Description.setError(messageError);
+                edt_Image.setError(messageError);
                 break;
             default:
                 break;

@@ -36,6 +36,18 @@ public class ListProduct_Application extends Application {
         saveProduct(new Product("Weed", "Smoke everyday", 5, "SnoopDog", "50mg", 420, R.drawable.weed));
         saveProduct(new Product("ADAM", "El lienzo del ADN", 500, "Fontaine Futuristics", "100ml", 9, R.drawable.adam));
         saveProduct(new Product("Virus-T", "¿Qué podría ir mal?", 25000, "Umbrella Corp.", "1", 1, R.drawable.tvirus));
+        saveProduct(new Product("Dalsy", "La panacea tal cual", 12.50, "DalsyCorp", "250ml", 5, R.drawable.dalsy_logo));
+        saveProduct(new Product("Neuropocina", "Elimina el rechazo a implantes cibernéticos", 5000, "VersaLife", "50ml", 2, R.drawable.neuropozyne));
+        saveProduct(new Product("Paracetamol", "La pastilla antitodo", 7, "Bayer", "1g", 50, R.drawable.paracetamol));
+        saveProduct(new Product("Weed", "Smoke everyday", 5, "SnoopDog", "50mg", 420, R.drawable.weed));
+        saveProduct(new Product("ADAM", "El lienzo del ADN", 500, "Fontaine Futuristics", "100ml", 9, R.drawable.adam));
+        saveProduct(new Product("Virus-T", "¿Qué podría ir mal?", 25000, "Umbrella Corp.", "1", 1, R.drawable.tvirus));
+        saveProduct(new Product("Dalsy", "La panacea tal cual", 12.50, "DalsyCorp", "250ml", 5, R.drawable.dalsy_logo));
+        saveProduct(new Product("Neuropocina", "Elimina el rechazo a implantes cibernéticos", 5000, "VersaLife", "50ml", 2, R.drawable.neuropozyne));
+        saveProduct(new Product("Paracetamol", "La pastilla antitodo", 7, "Bayer", "1g", 50, R.drawable.paracetamol));
+        saveProduct(new Product("Weed", "Smoke everyday", 5, "SnoopDog", "50mg", 420, R.drawable.weed));
+        saveProduct(new Product("ADAM", "El lienzo del ADN", 500, "Fontaine Futuristics", "100ml", 9, R.drawable.adam));
+        saveProduct(new Product("Virus-T", "¿Qué podría ir mal?", 25000, "Umbrella Corp.", "1", 1, R.drawable.tvirus));
     }
 
     public void saveProduct(Product product){

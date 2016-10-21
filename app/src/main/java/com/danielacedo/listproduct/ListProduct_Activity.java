@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
-import com.danielacedo.listproduct.model.Product;
+import com.danielacedo.listproduct.adapter.ProductAdapter;
+import com.danielacedo.listproduct.adapter.ProductAdapterA;
+import com.danielacedo.listproduct.adapter.ProductAdapterB;
 
 /**
  * Activity inherating from ListActivity that displays all the products in out Applicationś List
@@ -17,7 +18,8 @@ import com.danielacedo.listproduct.model.Product;
 public class ListProduct_Activity extends ListActivity {
     public final static int REQUEST_CODE_ADDPRODUCT = 1; //Request code to start an Activity for adding products
 
-    ArrayAdapter<Product> adapter;
+    //ArrayAdapter<Product> adapter;
+    ProductAdapter adapter;
     FloatingActionButton fab_AddProduct;
 
     @Override
@@ -26,10 +28,13 @@ public class ListProduct_Activity extends ListActivity {
         setContentView(R.layout.activity_list_product_);
 
         //First case: Non custom Adapter
-        adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1,
+        /*adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1,
                 ((ListProduct_Application)getApplication()).getProducts());
-        getListView().setAdapter(adapter);
+        getListView().setAdapter(adapter);*/
 
+        //Second case: Custom adapter
+        adapter = new ProductAdapter(this);
+        getListView().setAdapter(adapter);
 
 
         //FloatingActionButton

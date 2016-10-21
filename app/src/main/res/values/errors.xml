@@ -14,5 +14,6 @@
     <string name="err_productDosage_empty">Debe introducir una concentración</string>
     <string name="err_productStock_empty">Debe introducir las existencias</string>
     <string name="err_productImage_empty">Debe introducir la imagen</string>
+    <string name="err_addProduct_formatNumber">Introduce un número</string>
 
 </resources>

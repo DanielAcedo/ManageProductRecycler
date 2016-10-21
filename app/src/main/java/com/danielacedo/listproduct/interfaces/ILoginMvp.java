@@ -26,13 +26,13 @@ public interface ILoginMvp {
          * @param messageError The message to be displayed
          * @author Daniel Acedo Calderón
          */
-        public void setMessageError(String messageError, int view);
+        void setMessageError(String messageError, int view);
     }
 
     /**
      * Interface to be implemented by the presenter in the pattern
      */
     interface Presenter{
-        public void validateCredentials(String user, String pass);
+        void validateCredentials(String user, String pass);
     }
 }

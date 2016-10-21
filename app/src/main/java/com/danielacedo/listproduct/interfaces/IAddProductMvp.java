@@ -17,7 +17,7 @@ public interface IAddProductMvp {
          * @param messageError The message to be displayed
          * @author Daniel Acedo Calderón
          */
-        public void setMessageError(String messageError, int view);
+        void setMessageError(String messageError, int view);
     }
 
     /**
@@ -36,6 +36,6 @@ public interface IAddProductMvp {
          * @param stock Stock of the product
          * @param image Image's id
          */
-        public void validateProductFields(String name, String description, String brand, String dosage, double price, int stock, int image);
+        void validateProductFields(String name, String description, String brand, String dosage, String price, String stock, String image);
     }
 }

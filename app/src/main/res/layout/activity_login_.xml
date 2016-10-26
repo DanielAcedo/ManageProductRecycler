@@ -75,6 +75,7 @@
             android:text="@string/btn_Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/selbtnlogin"
             android:id="@+id/btn_Login"
             style="?android:attr/buttonBarButtonStyle"
             />

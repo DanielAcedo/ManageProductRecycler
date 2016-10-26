@@ -57,7 +57,7 @@ public class ListProduct_Application extends Application {
     }
 
     public List<Product> getProducts(){
-        Collections.sort(productList);
+        Collections.sort(productList, (o1, o2) -> Double.compare(o1.getPrice(), o2.getPrice())); //Lambda expression example
         return productList;
     }
 

@@ -1,11 +1,16 @@
 package com.danielacedo.manageproductrecycler.model;
 
+import java.util.Comparator;
 import java.util.UUID;
 
 /**
  * Created by Daniel on 19/10/16.
  */
 
+/**
+ * Model class representing a pharmaceutical product
+ * @author Daniel Acedo Calderón
+ */
 public class Product implements Comparable<Product> {
     private String id;
     private String name;
@@ -15,6 +20,19 @@ public class Product implements Comparable<Product> {
     private double price;
     private int stock;
     private int image;
+    public static final Comparator<Product> PRICE_COMPARATOR = new Comparator<Product>() {
+        @Override
+        public int compare(Product o1, Product o2) {
+            return Double.compare(o1.getPrice(), o2.getPrice());
+        }
+    };
+
+    public static final Comparator<Product> STOCK_COMPARATOR = new Comparator<Product>() {
+        @Override
+        public int compare(Product o1, Product o2) {
+            return Double.compare(o1.getStock(), o2.getStock());
+        }
+    };
 
     public Product(String name, String description, double price, String brand, String dosage, int stock, int image) {
         this.id = UUID.randomUUID().toString();

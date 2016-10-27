@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.danielacedo.manageproductrecycler.Product_Activity" />
-        <activity android:name="com.danielacedo.manageproductrecycler.AddProduct_Activity"></activity>
+        <activity android:name="com.danielacedo.manageproductrecycler.ManageProduct_Activity"></activity>
     </application>
 
 </manifest>

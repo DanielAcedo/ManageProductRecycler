@@ -7,13 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.danielacedo.manageproductrecycler.interfaces.IAddProductMvp;
-import com.danielacedo.manageproductrecycler.presenter.AddProductPresenter;
+import com.danielacedo.manageproductrecycler.presenter.ManageProductPresenter;
 
 /**
  * Activity used for adding new products to the application. After creating one successfully it calls back ListProductActivity
  * @author Daniel Acedo Calderón
  */
-public class AddProduct_Activity extends AppCompatActivity implements IAddProductMvp.View{
+public class ManageProduct_Activity extends AppCompatActivity implements IAddProductMvp.View{
 
     IAddProductMvp.Presenter presenter;
     EditText edt_Name, edt_Description, edt_Price, edt_Brand, edt_Dosage, edt_Stock, edt_Image;
@@ -22,9 +22,9 @@ public class AddProduct_Activity extends AppCompatActivity implements IAddProduc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product_);
+        setContentView(R.layout.activity_manage_product_);
 
-        presenter = new AddProductPresenter(this);
+        presenter = new ManageProductPresenter(this);
 
         edt_Name = (EditText) findViewById(R.id.edt_Name);
         edt_Description = (EditText) findViewById(R.id.edt_Description);

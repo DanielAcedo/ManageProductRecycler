@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generic button to be included in any view you want using include -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:text="@string/btn_AddProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/btn_AddProduct" />
+</merge>

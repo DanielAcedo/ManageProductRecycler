@@ -9,6 +9,12 @@
     <string name="messagePassword">Introduzca la contraseña</string>
     <string name="messageUser">Introduzca el usuario</string>
 
+    <!-- Menu -->
+    <string name="action_add_product">Añadir</string>
+    <string name="action_sort_alphabetically">Ordenar alfabeticamente</string>
+    <string name="action_settings_general">Opciones</string>
+    <string name="action_settings_account">Cuenta</string>
+
     <!-- AddProduct-->
     <string name="edt_Name">Nombre</string>
     <string name="edt_Description">Descripción</string>

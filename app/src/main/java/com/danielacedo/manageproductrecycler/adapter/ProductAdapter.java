@@ -14,6 +14,8 @@ import com.danielacedo.manageproductrecycler.ListProduct_Application;
 import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.model.Product;
 
+import java.util.List;
+
 /**
  * Created by Daniel on 21/10/16.
  */
@@ -69,6 +71,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     }
 
+
+    public void getAllProducts(List<Product> productList){
+
+    }
 
     /**
      * Inner class that contains the widgets from the XML file

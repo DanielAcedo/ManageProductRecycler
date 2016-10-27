@@ -17,11 +17,11 @@ import com.danielacedo.manageproductrecycler.model.Product;
  * Presenter for the AddProductView
  * @author Daniel Acedo Calderón
  */
-public class AddProductPresenter implements IAddProductMvp.Presenter{
+public class ManageProductPresenter implements IAddProductMvp.Presenter{
 
     IAddProductMvp.View view;
 
-    public AddProductPresenter(IAddProductMvp.View view){
+    public ManageProductPresenter(IAddProductMvp.View view){
         this.view = view;
     }
 

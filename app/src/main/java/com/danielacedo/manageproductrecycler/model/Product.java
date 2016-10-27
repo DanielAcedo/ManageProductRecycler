@@ -34,6 +34,14 @@ public class Product implements Comparable<Product> {
         }
     };
 
+    public static final Comparator<Product> NAME_ASCENDANT_COMPARATOR = ((p1, p2) -> {
+        return p1.getName().compareTo(p2.getName());
+    });
+
+    public static final Comparator<Product> NAME_DESCENDANT_COMPARATOR = ((p1, p2) -> {
+        return -1 * p1.getName().compareTo(p2.getName());
+    });
+
     public Product(String name, String description, double price, String brand, String dosage, int stock, int image) {
         this.id = UUID.randomUUID().toString();
         this.name = name;

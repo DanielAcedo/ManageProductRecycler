@@ -13,6 +13,7 @@ import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,12 +22,16 @@ import java.util.List;
 
 public class ProductAdapterRecycler extends RecyclerView.Adapter<ProductAdapterRecycler.ProductViewHolder>{
 
+    private boolean sortedNameAscendant = true;
+
     private List<Product> products;
     private Context context;
 
     public ProductAdapterRecycler(Context context){
         this.context = context;
-        this.products = ((ListProduct_Application)context.getApplicationContext()).getProducts();
+        this.products = new ArrayList<Product>();
+        products.addAll(((ListProduct_Application)context.getApplicationContext()).getProducts()); //Create local copy from Application List.
+
     }
 
     @Override
@@ -62,4 +67,20 @@ public class ProductAdapterRecycler extends RecyclerView.Adapter<ProductAdapterR
 
         }
     }
+
+    public void getAlphabeticallySortedProducts(){
+
+        if(!sortedNameAscendant){ //If sorted alphabetically backwards
+            Collections.sort(products, Product.NAME_ASCENDANT_COMPARATOR);
+            sortedNameAscendant = true;
+        }
+        else if (sortedNameAscendant){
+            Collections.sort(products, Product.NAME_DESCENDANT_COMPARATOR);
+            sortedNameAscendant = false;
+        }
+
+        this.notifyDataSetChanged();
+    }
+
+
 }

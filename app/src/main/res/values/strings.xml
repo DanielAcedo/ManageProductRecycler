@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Login -->
-    <string name="app_name">LoginTextInputLayout</string>
+    <string name="app_name">ManageProduct</string>
     <string name="txv_User">Usuario</string>
     <string name="txv_Pass">Contraseña</string>
     <string name="chb_Remember">Recordar</string>

@@ -1,5 +1,6 @@
 package com.danielacedo.manageproductrecycler;
 
+import android.graphics.Typeface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,6 +77,9 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
                 loginMvp.validateCredentials(edt_User.getText().toString(), edt_Pass.getText().toString());
             }
         });
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "sun.ttf");
+        edt_User.setTypeface(font);
 
         //Check user persistence
         User user = ((ListProduct_Application)getApplicationContext()).getUser();

@@ -18,6 +18,8 @@
         </activity>
         <activity android:name="com.danielacedo.manageproductrecycler.Product_Activity" />
         <activity android:name="com.danielacedo.manageproductrecycler.ManageProduct_Activity"></activity>
+        <activity android:name="com.danielacedo.manageproductrecycler.GeneralSettings_Activity"></activity>
+        <activity android:name="com.danielacedo.manageproductrecycler.AccountSettings_Activity"></activity>
     </application>
 
 </manifest>

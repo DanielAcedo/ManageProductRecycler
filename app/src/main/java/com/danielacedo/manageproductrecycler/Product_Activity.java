@@ -59,18 +59,23 @@ public class Product_Activity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
 
         switch (item.getItemId()){
             case R.id.action_add_product:
-                Intent intent = new Intent(Product_Activity.this, ManageProduct_Activity.class);
+                intent = new Intent(Product_Activity.this, ManageProduct_Activity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADD_PRODUCT);
                 break;
             case R.id.action_sort_alphabetically:
                 adapter.getAlphabeticallySortedProducts();
                 break;
             case R.id.action_settings_general:
+                intent = new Intent(Product_Activity.this, GeneralSettings_Activity.class);
+                startActivity(intent);
                 break;
             case R.id.action_settings_account:
+                intent = new Intent(Product_Activity.this, AccountSettings_Activity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);

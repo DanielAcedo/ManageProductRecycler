@@ -74,7 +74,7 @@ public class ProductAdapterRecycler extends RecyclerView.Adapter<ProductAdapterR
             Collections.sort(products, Product.NAME_ASCENDANT_COMPARATOR);
             sortedNameAscendant = true;
         }
-        else if (sortedNameAscendant){
+        else {
             Collections.sort(products, Product.NAME_DESCENDANT_COMPARATOR);
             sortedNameAscendant = false;
         }

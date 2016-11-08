@@ -33,6 +33,17 @@ public interface ILoginMvp {
      * Interface to be implemented by the presenter in the pattern
      */
     interface Presenter{
+        /**
+         * Checks whether the submitted login information is valid and act in consequence
+         * @param user User login
+         * @param pass Password login
+         */
         void validateCredentials(String user, String pass);
+
+        /**
+         * Deals with opening the RegisterActivity and reacts to its results
+         * @author Daniel Acedo Calderón
+         */
+        void openRegisterActivity();
     }
 }

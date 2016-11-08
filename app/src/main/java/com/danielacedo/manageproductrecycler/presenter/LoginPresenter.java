@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.danielacedo.manageproductrecycler.ListProduct_Application;
 import com.danielacedo.manageproductrecycler.Product_Activity;
 import com.danielacedo.manageproductrecycler.R;
+import com.danielacedo.manageproductrecycler.Register_Activity;
 import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
 import com.danielacedo.manageproductrecycler.model.User;
 
@@ -28,6 +29,11 @@ public class LoginPresenter implements ILoginMvp.Presenter {
         this.view = view;
     }
 
+    /**
+     * Checks whether the submitted login information is valid and act in consequence
+     * @param user User login
+     * @param pass Password login
+     */
     @Override
     public void validateCredentials(String user, String pass) {
 
@@ -53,5 +59,15 @@ public class LoginPresenter implements ILoginMvp.Presenter {
         }
 
 
+    }
+
+    /**
+     * Deals with opening the RegisterActivity and reacts to its results
+     * @author Daniel Acedo Calderón
+     */
+    @Override
+    public void openRegisterActivity() {
+        Intent intent = new Intent((Context)view, Register_Activity.class);
+        ((Context) view).startActivity(intent);
     }
 }

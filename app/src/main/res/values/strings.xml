@@ -6,8 +6,21 @@
     <string name="txv_Pass">Contraseña</string>
     <string name="chb_Remember">Recordar</string>
     <string name="btn_Login" translatable="false">Login</string>
+    <string name="btn_Register">Registrar</string>
     <string name="messagePassword">Introduzca la contraseña</string>
     <string name="messageUser">Introduzca el usuario</string>
+
+    <!-- Register -->
+    <string name="txv_UserRegister">Usuario</string>
+    <string name="txv_PassRegister">Contraseña</string>
+    <string name="txv_ConfirmPass">Confirmar contraseña</string>
+    <string name="txv_Email">Email</string>
+    <string name="txv_ConfirmEmail">Confirmar email</string>
+    <string name="txv_ProvinciaRegister">Provincia</string>
+    <string name="txv_LocalidadRegister">Localidad</string>
+    <string name="rg_EmpresaParticular">Tipo usuario</string>
+    <string name="rb_Empresa">Empresa</string>
+    <string name="rb_Particular">Particular</string>
 
     <!-- Menu -->
     <string name="action_add_product">Añadir</string>

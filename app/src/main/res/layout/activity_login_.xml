@@ -63,11 +63,10 @@
         android:id="@+id/chb_Remember" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/chb_Remember"
-        android:layout_marginTop="@dimen/widget_margin_top"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/chb_Remember"
         >
 
 
@@ -78,10 +77,20 @@
             android:background="@drawable/selbtnlogin"
             android:id="@+id/btn_Login"
             style="?android:attr/buttonBarButtonStyle"
+            android:layout_weight="1"
             />
 
-    </LinearLayout>
+        <Button
+            android:text="@string/btn_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selbtnlogin"
+            android:id="@+id/btn_Register"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1" />
 
+    </LinearLayout>
 
 
 </RelativeLayout>

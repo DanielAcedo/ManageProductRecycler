@@ -21,7 +21,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
 
     private ILoginMvp.Presenter loginMvp;
     private EditText edt_User, edt_Pass;
-    private Button btn_Login;
+    private Button btn_Login, btn_Register;
     private TextInputLayout til_User, til_Pass;
 
     private final String TAG = "loginrelative";
@@ -71,11 +71,13 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
         til_User = (TextInputLayout)findViewById(R.id.til_User);
         til_Pass = (TextInputLayout)findViewById(R.id.til_Password);
         btn_Login = (Button)findViewById(R.id.btn_Login);
-        btn_Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginMvp.validateCredentials(edt_User.getText().toString(), edt_Pass.getText().toString());
-            }
+        btn_Login.setOnClickListener((v) -> {
+            loginMvp.validateCredentials(edt_User.getText().toString(), edt_Pass.getText().toString());
+        });
+
+        btn_Register = (Button)findViewById(R.id.btn_Register);
+        btn_Register.setOnClickListener((v)->{
+            loginMvp.openRegisterActivity();
         });
 
         Typeface font = Typeface.createFromAsset(getAssets(), "sun.ttf");

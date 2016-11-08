@@ -3,23 +3,24 @@
     package="com.danielacedo.manageproductrecycler">
 
     <application
-        android:name="com.danielacedo.manageproductrecycler.ListProduct_Application"
+        android:name=".ListProduct_Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.danielacedo.manageproductrecycler.Login_Activity">
+        <activity android:name=".Login_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.danielacedo.manageproductrecycler.Product_Activity" />
-        <activity android:name="com.danielacedo.manageproductrecycler.ManageProduct_Activity"></activity>
-        <activity android:name="com.danielacedo.manageproductrecycler.GeneralSettings_Activity"></activity>
-        <activity android:name="com.danielacedo.manageproductrecycler.AccountSettings_Activity"></activity>
+        <activity android:name=".Product_Activity" />
+        <activity android:name=".ManageProduct_Activity" />
+        <activity android:name=".GeneralSettings_Activity" />
+        <activity android:name=".AccountSettings_Activity" />
+        <activity android:name=".Register_Activity"></activity>
     </application>
 
 </manifest>

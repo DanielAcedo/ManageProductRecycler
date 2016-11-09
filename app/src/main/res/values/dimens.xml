@@ -5,4 +5,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="widget_margin_top">25dp</dimen>
     <dimen name="widget_textView_width">100dp</dimen>
+
+    <!-- Register -->
+    <dimen name="register_separator_margin_bottom">5dp</dimen>
+    <dimen name="register_separator_height">1dp</dimen>
 </resources>

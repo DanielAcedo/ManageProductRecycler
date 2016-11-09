@@ -72,15 +72,17 @@ public class Register_Activity extends AppCompatActivity {
 
                 TypedArray resourceProvinces = getResources().obtainTypedArray(R.array.array_provincia_a_localidades);
 
+                int cityArrayId = resourceProvinces.getResourceId(position, 0);
+                Log.d("Register", String.valueOf(cityArrayId));
 
-                Log.d("Register", resourceProvinces.getString(position));
+                if(cityArrayId > 0) {
+                    adapter = ArrayAdapter.createFromResource(Register_Activity.this,
+                            cityArrayId,
+                            android.R.layout.simple_spinner_item
+                    );
 
-                adapter = ArrayAdapter.createFromResource(Register_Activity.this,
-                            getResources().getIdentifier(resourceProvinces.getString(position), "array", "com.danielacedo.manageproductrecycler"),
-                            android.R.layout.simple_spinner_dropdown_item
-                        );
-
-                spCity.setAdapter(adapter);
+                    spCity.setAdapter(adapter);
+                }
             }
 
             @Override

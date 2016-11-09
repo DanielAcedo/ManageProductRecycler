@@ -38,11 +38,19 @@
                 android:ems="10"
                 android:id="@+id/edt_UserRegister" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_separator_height"
+                android:layout_below="@id/edt_UserRegister"
+                android:background="@color/colorSeparatorRegister"
+                android:layout_marginBottom="@dimen/register_separator_margin_bottom"
+                android:id="@+id/separator_UserRegister"/>
+
             <TextView
                 android:text="@string/txv_PassRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edt_UserRegister"
+                android:layout_below="@id/separator_UserRegister"
                 android:id="@+id/txv_PassRegister" />
 
             <EditText
@@ -52,6 +60,7 @@
                 android:layout_below="@id/txv_PassRegister"
                 android:ems="10"
                 android:id="@+id/edt_PassRegister" />
+
 
             <TextView
                 android:text="@string/txv_ConfirmPass"
@@ -68,11 +77,20 @@
                 android:ems="10"
                 android:id="@+id/edt_ConfirmPass" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_separator_height"
+                android:layout_below="@id/edt_ConfirmPass"
+                android:layout_marginBottom="@dimen/register_separator_margin_bottom"
+                android:background="@color/colorSeparatorRegister"
+                android:id="@+id/separator_PassRegister"/>
+
+
             <TextView
                 android:text="@string/txv_Email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edt_ConfirmPass"
+                android:layout_below="@id/separator_PassRegister"
                 android:id="@+id/txv_Email" />
 
             <EditText
@@ -97,6 +115,14 @@
                 android:layout_below="@id/txv_ConfirmEmail"
                 android:ems="10"
                 android:id="@+id/edt_ConfirmEmail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_separator_height"
+                android:layout_below="@id/edt_ConfirmEmail"
+                android:layout_marginBottom="@dimen/register_separator_margin_bottom"
+                android:background="@color/colorSeparatorRegister"
+                android:id="@+id/separator_EmailRegister"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -145,11 +171,19 @@
                     android:id="@+id/spn_CityRegister" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_separator_height"
+                android:layout_below="@id/lly_CityRegister"
+                android:layout_marginBottom="@dimen/register_separator_margin_bottom"
+                android:background="@color/colorSeparatorRegister"
+                android:id="@+id/separator_ProvinceCityRegister"/>
+
             <TextView
                 android:text="@string/rg_CompanyParticular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lly_CityRegister"
+                android:layout_below="@id/separator_ProvinceCityRegister"
                 android:id="@+id/txv_CompanyParticular" />
 
             <RadioGroup
@@ -192,6 +226,14 @@
                 android:ems="10"
                 android:id="@+id/edt_CompanyNameRegister"
                 android:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_separator_height"
+                android:layout_below="@id/edt_CompanyNameRegister"
+                android:layout_marginBottom="@dimen/register_separator_margin_bottom"
+                android:background="@color/colorSeparatorRegister"
+                android:id="@+id/separator_CompanyNameRegister"/>
 
         </RelativeLayout>
     </ScrollView>

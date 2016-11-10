@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
 import com.danielacedo.manageproductrecycler.model.User;
+import com.danielacedo.manageproductrecycler.preferences.AccountPreference;
 import com.danielacedo.manageproductrecycler.presenter.LoginPresenter;
 
 import static com.danielacedo.manageproductrecycler.R.layout.activity_login_;
@@ -89,6 +90,8 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
             Log.d(TAG, user.getUser());
         }
 
+        checkUserPreference();
+
         Log.d(TAG, "Created Activity");
     }
 
@@ -129,7 +132,16 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
         }
     }
 
+    private void checkUserPreference(){
 
+        String user = AccountPreference.getInstance(Login_Activity.this).readUser();
+        String password = AccountPreference.getInstance(Login_Activity.this).readPassword();
+
+        if (!user.equals("") && !password.equals("")){
+            edt_User.setText(user);
+            edt_Pass.setText(password);
+        }
+    }
 
     /**
      * Reset the input fiels for the login

@@ -1,11 +1,14 @@
 package com.danielacedo.manageproductrecycler.presenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.widget.Toast;
 
 import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.interfaces.IRegisterMvp;
+import com.danielacedo.manageproductrecycler.preferences.AccountPreference;
 
 import java.util.regex.Pattern;
 
@@ -49,6 +52,13 @@ public class RegisterPresenter implements IRegisterMvp.Presenter{
         }
         else if(isCompany && companyName.equals("")){
             view.setMessageError(((Context)view).getResources().getString(R.string.err_companyNameEmpty), R.id.edt_CompanyNameRegister);
+        }else{
+            AccountPreference accountPreference = AccountPreference.getInstance((Context)view);
+            accountPreference.putUser(user);
+            accountPreference.putPassword(pass);
+
+            Toast.makeText((Context)view, R.string.Toast_SuccessfulRegister, Toast.LENGTH_SHORT).show();
+            ((Activity)view).finish();
         }
     }
 }

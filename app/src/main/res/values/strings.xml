@@ -23,6 +23,7 @@
     <string name="rb_Particular">Particular</string>
     <string name="txv_CompanyNameRegister">Nombre de empresa</string>
     <string name="btn_ConfirmSignup">Registrarse</string>
+    <string name="Toast_SuccessfulRegister">Registro exitoso</string>
 
     <!-- Menu -->
     <string name="action_add_product">Añadir</string>

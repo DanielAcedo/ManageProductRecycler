@@ -13,7 +13,7 @@ import com.danielacedo.manageproductrecycler.interfaces.IPreferences;
 public class AccountPreference implements IPreferences{
 
     private static AccountPreference instance;
-    private static Context context;
+    private Context context;
 
     public static final String FILE = "com.danielacedo.manageproductrecycler_preferences";
 
@@ -21,27 +21,40 @@ public class AccountPreference implements IPreferences{
     public static final String PASSWORD = "password";
 
 
-    private AccountPreference(){
-
+    private AccountPreference(Context con){
+        context = con;
     }
 
     //Singleton
-    public static IPreferences getInstance(Context con){
+    public static AccountPreference getInstance(Context con){
         if(instance == null){
-            instance = new AccountPreference();
-            context = con;
+            instance = new AccountPreference(con);
         }
 
         return instance;
     }
 
-    public static void putUser(String user){
-        //getEditor().putString(USER, user);
+    public void putUser(String user){
+        getEditor().putString(USER, user).apply();
     }
 
-    /*
-    //TODO To be implemented
-    private static SharedPreferences.Editor getEditor(){
+    public void putPassword(String password){
+        getEditor().putString(PASSWORD, password).apply();
+    }
 
-    }*/
+    public String readUser(){
+        return getSharedPreferences().getString(USER, "");
+    }
+
+    public String readPassword(){
+        return getSharedPreferences().getString(PASSWORD, "");
+    }
+
+    private SharedPreferences getSharedPreferences(){
+        return context.getSharedPreferences(FILE, IPreferences.MODE);
+    }
+
+    private SharedPreferences.Editor getEditor(){
+        return getSharedPreferences().edit();
+    }
 }

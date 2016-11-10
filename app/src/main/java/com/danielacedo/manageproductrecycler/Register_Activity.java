@@ -91,6 +91,7 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 ArrayAdapter<CharSequence> adapter;
 
                 TypedArray resourceProvinces = getResources().obtainTypedArray(R.array.array_provincia_a_localidades);
@@ -176,10 +177,10 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
      * @param view View that displays the error message
      */
     private void displayAndScrollErrorOnEditText(String messageError, EditText view){
-        view.setError(messageError);
-        view.getParent().requestChildFocus(view, view);
+        view.setError(messageError);    //Sets message error
+        view.getParent().requestChildFocus(view, view); //Scrolls the scrollview to the view
         if(view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);   //Focus on the view to make the message error visible
         }
     }
 }

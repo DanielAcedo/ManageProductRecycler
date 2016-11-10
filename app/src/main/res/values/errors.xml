@@ -6,6 +6,12 @@
     <string name="err_Password_UpperLowerCase">La contraseña debe tener al menos una letra mayúscula y otra minúscula</string>
     <string name="err_Password_Length">La contraseña debe de tener 8 caracteres</string>
 
+    <!-- Register -->
+    <string name="err_passwordMismatch">Las contraseñas no coinciden</string>
+    <string name="err_emailMismatch">Los emails no coinciden</string>
+    <string name="err_emailNotValid">El email no es valido</string>
+    <string name="err_companyNameEmpty">El nombre de la empresa no puede estar vacío</string>
+
     <!-- AddProduct -->
     <string name="err_productName_empty">Debe introducir un nombre</string>
     <string name="err_productDescription_empty">Debe introducir una descripción</string>

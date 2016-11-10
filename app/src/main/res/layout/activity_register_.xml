@@ -206,7 +206,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_Particular"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:checked="true" />
 
             </RadioGroup>
 

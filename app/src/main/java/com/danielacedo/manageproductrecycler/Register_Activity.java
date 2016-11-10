@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,18 +14,25 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
+import com.danielacedo.manageproductrecycler.interfaces.IRegisterMvp;
+import com.danielacedo.manageproductrecycler.presenter.RegisterPresenter;
+
 /**
  * Activity used for registering new users
  * @author Daniel Acedo Calderón
  */
-public class Register_Activity extends AppCompatActivity {
+public class Register_Activity extends AppCompatActivity  implements IRegisterMvp.View{
+
+    IRegisterMvp.Presenter presenter;
 
     private Spinner spProvince;
     private Spinner spCity;
-    private Button btn_ConfirmSignup;
     private RadioGroup rg_typeClient;
     private TextView txv_CompanyNameRegister;
     private EditText edt_CompanyNameRegister;
+
+    private EditText edt_UserRegister, edt_PassRegister, edt_ConfirmPass, edt_Email, edt_ConfirmEmail;
 
     private AdapterView.OnItemSelectedListener spinnerListener;
 
@@ -32,6 +40,14 @@ public class Register_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_);
+
+        presenter = new RegisterPresenter(this);
+
+        edt_UserRegister = (EditText)findViewById(R.id.edt_UserRegister);
+        edt_PassRegister = (EditText)findViewById(R.id.edt_PassRegister);
+        edt_ConfirmPass = (EditText)findViewById(R.id.edt_ConfirmPass);
+        edt_Email = (EditText)findViewById(R.id.edt_Email);
+        edt_ConfirmEmail = (EditText)findViewById(R.id.edt_ConfirmEmail);
 
         spProvince = (Spinner)findViewById(R.id.spn_ProvinceRegister);
         spCity = (Spinner)findViewById(R.id.spn_CityRegister);
@@ -55,16 +71,23 @@ public class Register_Activity extends AppCompatActivity {
         edt_CompanyNameRegister = (EditText)findViewById(R.id.edt_CompanyNameRegister);
 
         loadSpinnerProvince();
-        loadSpinnerCountry();
+        loadSpinnerCity();
 
     }
 
+    /**
+     * Hides or shows the company name entry
+     * @param value Whether the entry will be shown or not
+     */
     public void showCompany(boolean value){
         txv_CompanyNameRegister.setVisibility(value ? View.VISIBLE : View.GONE);
         edt_CompanyNameRegister.setVisibility(value ? View.VISIBLE : View.GONE);
     }
 
-    public void loadSpinnerCountry(){
+    /**
+     * Loads the cities spinner
+     */
+    public void loadSpinnerCity(){
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -94,13 +117,69 @@ public class Register_Activity extends AppCompatActivity {
         spProvince.setOnItemSelectedListener(spinnerListener);
     }
 
+    /**
+     * Loads the province spinner
+     */
     public void loadSpinnerProvince(){
         //Initialize province Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.provincias, android.R.layout.simple_spinner_item);
         spProvince.setAdapter(adapter);
     }
 
+    /**
+     * OnClick method for the signUp button
+     * @param view View that has been clicked
+     */
     public void signUp(View view){
 
+        String user = edt_UserRegister.getText().toString();
+        String pass = edt_PassRegister.getText().toString();
+        String confirmPass = edt_ConfirmPass.getText().toString();
+        String email = edt_Email.getText().toString();
+        String confirmEmail = edt_ConfirmEmail.getText().toString();
+        String province = spProvince.getSelectedItem().toString();
+        String city = spCity.getSelectedItem().toString();
+        boolean isCompany = rg_typeClient.getCheckedRadioButtonId() == R.id.rb_Company;
+        String companyName =  isCompany ? edt_CompanyNameRegister.getText().toString() : "";
+
+        presenter.validateCredentials(user, pass, confirmPass, email, confirmEmail, province, city, isCompany, companyName);
+    }
+
+    @Override
+    public void setMessageError(String messageError, int view) {
+        switch(view){
+            case R.id.edt_UserRegister:
+                displayAndScrollErrorOnEditText(messageError, edt_UserRegister);
+                break;
+            case R.id.edt_PassRegister:
+                displayAndScrollErrorOnEditText(messageError, edt_PassRegister);
+                break;
+            case R.id.edt_ConfirmPass:
+                displayAndScrollErrorOnEditText(messageError, edt_ConfirmPass);
+                break;
+            case R.id.edt_Email:
+                displayAndScrollErrorOnEditText(messageError, edt_Email);
+                break;
+            case R.id.edt_ConfirmEmail:
+                displayAndScrollErrorOnEditText(messageError, edt_ConfirmEmail);
+                break;
+            case R.id.edt_CompanyNameRegister:
+                displayAndScrollErrorOnEditText(messageError, edt_CompanyNameRegister);
+                break;
+
+        }
+    }
+
+    /**
+     * Scrolls the parent ScrollView of an EditText and then correctly sets and shows the error message
+     * @param messageError The message to be displayed
+     * @param view View that displays the error message
+     */
+    private void displayAndScrollErrorOnEditText(String messageError, EditText view){
+        view.setError(messageError);
+        view.getParent().requestChildFocus(view, view);
+        if(view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 }

@@ -19,16 +19,19 @@ public class AccountPreference implements IPreferences{
 
     public static final String USER = "user";
     public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+
+    private SharedPreferences sharedPreferences;
 
 
-    private AccountPreference(Context con){
-        context = con;
+    private AccountPreference(Context context){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     //Singleton
-    public static AccountPreference getInstance(Context con){
+    public static AccountPreference getInstance(Context context){
         if(instance == null){
-            instance = new AccountPreference(con);
+            instance = new AccountPreference(context);
         }
 
         return instance;
@@ -42,19 +45,23 @@ public class AccountPreference implements IPreferences{
         getEditor().putString(PASSWORD, password).apply();
     }
 
+    public void putEmail(String email){
+        getEditor().putString(EMAIL, email).apply();
+    }
+
     public String readUser(){
-        return getSharedPreferences().getString(USER, "");
+        return sharedPreferences.getString(USER, "");
     }
 
     public String readPassword(){
-        return getSharedPreferences().getString(PASSWORD, "");
+        return sharedPreferences.getString(PASSWORD, "");
     }
 
-    private SharedPreferences getSharedPreferences(){
-        return context.getSharedPreferences(FILE, IPreferences.MODE);
+    public String readEmail(){
+        return sharedPreferences.getString(EMAIL, "");
     }
 
     private SharedPreferences.Editor getEditor(){
-        return getSharedPreferences().edit();
+        return sharedPreferences.edit();
     }
 }

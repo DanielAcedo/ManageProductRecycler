@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
 import com.danielacedo.manageproductrecycler.interfaces.IRegisterMvp;
@@ -71,7 +72,6 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
         edt_CompanyNameRegister = (EditText)findViewById(R.id.edt_CompanyNameRegister);
 
         loadSpinnerProvince();
-        loadSpinnerCity();
 
     }
 
@@ -79,34 +79,66 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
      * Hides or shows the company name entry
      * @param value Whether the entry will be shown or not
      */
-    public void showCompany(boolean value){
+    private void showCompany(boolean value){
         txv_CompanyNameRegister.setVisibility(value ? View.VISIBLE : View.GONE);
         edt_CompanyNameRegister.setVisibility(value ? View.VISIBLE : View.GONE);
     }
 
     /**
-     * Loads the cities spinner
+     * Shows the currently selected City
      */
-    public void loadSpinnerCity(){
+    private void showCitySelected(){
+        String city = spCity.getSelectedItem().toString();
+        String province = spProvince.getSelectedItem().toString();
+
+        Toast.makeText(getApplicationContext(), getResources().getString(R.string.Toast_SelectedCity, city, province), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Loads the city spinner
+     * @param position Position clicked on the province spinner
+     */
+    private void loadSpinnerCity(int position){
+        ArrayAdapter<CharSequence> adapter;
+
+        TypedArray resourceProvinces = getResources().obtainTypedArray(R.array.array_provincia_a_localidades);
+
+        int cityArrayId = resourceProvinces.getResourceId(position, 0);
+        Log.d("Register", String.valueOf(cityArrayId));
+
+        if(cityArrayId > 0) {
+            adapter = ArrayAdapter.createFromResource(Register_Activity.this,
+                    cityArrayId,
+                    android.R.layout.simple_spinner_item
+            );
+
+            spCity.setAdapter(adapter);
+        }
+    }
+
+    /**
+     * Loads the province spinner
+     */
+    private void loadSpinnerProvince(){
+        //Initialize province Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.provincias, android.R.layout.simple_spinner_item);
+        spProvince.setAdapter(adapter);
+
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                ArrayAdapter<CharSequence> adapter;
+                switch (parent.getId()){
 
-                TypedArray resourceProvinces = getResources().obtainTypedArray(R.array.array_provincia_a_localidades);
+                    case R.id.spn_ProvinceRegister: //Load cities once a province is selected
+                        loadSpinnerCity(position);
+                        break;
 
-                int cityArrayId = resourceProvinces.getResourceId(position, 0);
-                Log.d("Register", String.valueOf(cityArrayId));
-
-                if(cityArrayId > 0) {
-                    adapter = ArrayAdapter.createFromResource(Register_Activity.this,
-                            cityArrayId,
-                            android.R.layout.simple_spinner_item
-                    );
-
-                    spCity.setAdapter(adapter);
+                    case R.id.spn_CityRegister:
+                        showCitySelected();
+                        break;
                 }
+
             }
 
             @Override
@@ -116,22 +148,14 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
         };
 
         spProvince.setOnItemSelectedListener(spinnerListener);
-    }
-
-    /**
-     * Loads the province spinner
-     */
-    public void loadSpinnerProvince(){
-        //Initialize province Spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.provincias, android.R.layout.simple_spinner_item);
-        spProvince.setAdapter(adapter);
+        spCity.setOnItemSelectedListener(spinnerListener);
     }
 
     /**
      * OnClick method for the signUp button
      * @param view View that has been clicked
      */
-    public void signUp(View view){
+    private void signUp(View view){
 
         String user = edt_UserRegister.getText().toString();
         String pass = edt_PassRegister.getText().toString();

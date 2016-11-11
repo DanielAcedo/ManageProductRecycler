@@ -9,7 +9,10 @@ import com.danielacedo.manageproductrecycler.Product_Activity;
 import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.Register_Activity;
 import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
+import com.danielacedo.manageproductrecycler.interfaces.IValidateAccount;
 import com.danielacedo.manageproductrecycler.model.User;
+
+import static com.danielacedo.manageproductrecycler.interfaces.IValidateAccount.Presenter.*;
 
 import java.util.regex.Pattern;
 
@@ -21,7 +24,7 @@ import java.util.regex.Pattern;
  * Presenter for the login Activity. It handles all the communication with the model and updates the view when necessary
  * @author Daniel Acedo Calderón
  */
-public class LoginPresenter implements ILoginMvp.Presenter {
+public class LoginPresenter implements IValidateAccount.Presenter {
 
     private ILoginMvp.View view;
 
@@ -29,43 +32,33 @@ public class LoginPresenter implements ILoginMvp.Presenter {
         this.view = view;
     }
 
-    /**
-     * Checks whether the submitted login information is valid and act in consequence
-     * @param user User login
-     * @param pass Password login
-     */
     @Override
-    public void validateCredentials(String user, String pass) {
+    public void validateCredentialsLogin(String user, String password){
 
-        if(TextUtils.isEmpty(user)) {
-            view.setMessageError(((Context) view).getResources().getString(R.string.err_emptyData), R.id.edt_User);
-        }
-        else if(TextUtils.isEmpty(pass)){
-            view.setMessageError(((Context) view).getResources().getString(R.string.err_emptyData), R.id.edt_Pass);
-        }
-        else if(!Pattern.matches(".*[0-9].*", pass)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_Digit), R.id.edt_Pass);
-        }
-        else if(!Pattern.matches(".*[a-z].*",pass) || !Pattern.matches(".*[A-Z].*",pass)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_UpperLowerCase), R.id.edt_Pass);
-        }
-        else if(pass.length()<8){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_Length), R.id.edt_Pass);
+        int validateUser = validateCredentialsUser(user);
+        int validatePassword = validateCredentialsPassword(password);
+
+        boolean userOk = validateUser == IValidateAccount.OK;
+        boolean passOK = validatePassword == IValidateAccount.OK;
+
+        if(userOk && passOK){
+            success(user, password);
         }else{
-            //Save the user in the Application class
-            ((ListProduct_Application)((Context)view).getApplicationContext()).setUser(new User(user, pass));
-            Intent intent = new Intent((Context)view, Product_Activity.class);
-            ((Context) view).startActivity(intent);
+            //TODO Switch errors
         }
+    }
 
-
+    public void success(String user, String pass){
+        //Save the user in the Application class
+        ((ListProduct_Application)((Context)view).getApplicationContext()).setUser(new User(user, pass));
+        Intent intent = new Intent((Context)view, Product_Activity.class);
+        ((Context) view).startActivity(intent);
     }
 
     /**
      * Deals with opening the RegisterActivity and reacts to its results
      * @author Daniel Acedo Calderón
      */
-    @Override
     public void openRegisterActivity() {
         Intent intent = new Intent((Context)view, Register_Activity.class);
         ((Context) view).startActivity(intent);

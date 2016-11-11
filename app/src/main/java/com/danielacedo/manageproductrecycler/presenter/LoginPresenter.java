@@ -36,7 +36,6 @@ public class LoginPresenter implements ILoginMvp.Presenter {
      */
     @Override
     public void validateCredentials(String user, String pass) {
-
         if(TextUtils.isEmpty(user)) {
             view.setMessageError(((Context) view).getResources().getString(R.string.err_emptyData), R.id.edt_User);
         }
@@ -57,9 +56,9 @@ public class LoginPresenter implements ILoginMvp.Presenter {
             Intent intent = new Intent((Context)view, Product_Activity.class);
             ((Context) view).startActivity(intent);
         }
-
-
     }
+
+
 
     /**
      * Deals with opening the RegisterActivity and reacts to its results

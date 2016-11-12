@@ -13,11 +13,13 @@ public interface IValidateUser extends IValidateAccount {
     interface Presenter{
         static int validateCredentialsEmail(String email){
 
+            int code = OK;
+
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                return EMAIL_INVALID;
-            }else{
-                return OK;
+                code = EMAIL_INVALID;
             }
+
+            return code;
         }
     }
 }

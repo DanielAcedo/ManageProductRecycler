@@ -44,12 +44,13 @@ public interface IValidateAccount {
         void validateCredentialsLogin(String user, String pass);
 
         static int validateCredentialsUser(String user){
+            int code = OK;
 
             if(TextUtils.isEmpty(user)) {
-                return DATA_EMPTY;
+                code = DATA_EMPTY;
             }
 
-            return OK;
+            return code;
 
         }
 

@@ -26,14 +26,14 @@ import java.util.regex.Pattern;
  */
 public class LoginPresenter implements IValidateAccount.Presenter {
 
-    private ILoginMvp.View view;
+    private IValidateAccount.View view;
 
-    public LoginPresenter(ILoginMvp.View view){
+    public LoginPresenter(IValidateAccount.View view){
         this.view = view;
     }
 
     @Override
-    public void validateCredentialsLogin(String user, String password){
+    public void validateCredentialsLogin(String user, String password) {
 
         int validateUser = validateCredentialsUser(user);
         int validatePassword = validateCredentialsPassword(password);
@@ -41,11 +41,38 @@ public class LoginPresenter implements IValidateAccount.Presenter {
         boolean userOk = validateUser == IValidateAccount.OK;
         boolean passOK = validatePassword == IValidateAccount.OK;
 
+
+        if (!userOk) {
+            view.setMessageError(switchErrorsMessage(validateUser), R.id.edt_User);
+        }
+        if(!passOK){
+            view.setMessageError(switchErrorsMessage(validatePassword), R.id.edt_Pass);
+        }
         if(userOk && passOK){
             success(user, password);
-        }else{
-            //TODO Switch errors
         }
+    }
+
+    public String switchErrorsMessage(int code){
+
+        String message = "";
+
+        switch(code){
+            case IValidateAccount.DATA_EMPTY:
+                message = ((Context)view).getResources().getString(R.string.err_emptyData);
+                break;
+            case IValidateAccount.PASSWORD_DIGIT:
+                message = ((Context)view).getResources().getString(R.string.err_Password_Digit);
+                break;
+            case IValidateAccount.PASSWORD_UPPERLOWERCASE:
+                message = ((Context)view).getResources().getString(R.string.err_Password_UpperLowerCase);
+                break;
+            case IValidateAccount.PASSWORD_LENGTH:
+                message = ((Context)view).getResources().getString(R.string.err_Password_Length);
+                break;
+        }
+
+        return message;
     }
 
     public void success(String user, String pass){
@@ -55,12 +82,4 @@ public class LoginPresenter implements IValidateAccount.Presenter {
         ((Context) view).startActivity(intent);
     }
 
-    /**
-     * Deals with opening the RegisterActivity and reacts to its results
-     * @author Daniel Acedo Calderón
-     */
-    public void openRegisterActivity() {
-        Intent intent = new Intent((Context)view, Register_Activity.class);
-        ((Context) view).startActivity(intent);
-    }
 }

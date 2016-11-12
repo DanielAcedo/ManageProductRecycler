@@ -1,5 +1,7 @@
 package com.danielacedo.manageproductrecycler;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +21,7 @@ import com.danielacedo.manageproductrecycler.presenter.LoginPresenter;
 
 import static com.danielacedo.manageproductrecycler.R.layout.activity_login_;
 
-public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
+public class Login_Activity extends AppCompatActivity implements IValidateAccount.View{
 
     private IValidateAccount.Presenter loginMvp;
     private EditText edt_User, edt_Pass;
@@ -79,8 +81,7 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
 
         btn_Register = (Button)findViewById(R.id.btn_Register);
         btn_Register.setOnClickListener((v)->{
-            //TODO Fix interface
-            //loginMvp.openRegisterActivity();
+            openRegisterActivity();
         });
 
         Typeface font = Typeface.createFromAsset(getAssets(), "sun.ttf");
@@ -143,6 +144,15 @@ public class Login_Activity extends AppCompatActivity implements ILoginMvp.View{
             edt_User.setText(user);
             edt_Pass.setText(password);
         }
+    }
+
+    /**
+     * Deals with opening the RegisterActivity and reacts to its results
+     * @author Daniel Acedo Calderón
+     */
+    public void openRegisterActivity() {
+        Intent intent = new Intent(Login_Activity.this, Register_Activity.class);
+        startActivity(intent);
     }
 
     /**

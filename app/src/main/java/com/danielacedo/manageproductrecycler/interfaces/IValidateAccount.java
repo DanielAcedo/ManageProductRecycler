@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.danielacedo.manageproductrecycler.ListProduct_Application;
 import com.danielacedo.manageproductrecycler.Product_Activity;
 import com.danielacedo.manageproductrecycler.R;
+import com.danielacedo.manageproductrecycler.model.Error;
 import com.danielacedo.manageproductrecycler.model.User;
 
 import java.util.regex.Pattern;
@@ -34,6 +35,8 @@ public interface IValidateAccount {
          * @author Daniel Acedo Calderón
          */
         void setMessageError(String messageError, int view);
+
+        void startActivity(Intent intent);
     }
 
     /**
@@ -56,19 +59,19 @@ public interface IValidateAccount {
 
         static int validateCredentialsPassword(String pass){
 
-            int code = OK;
+            int code = Error.OK;
 
             if(TextUtils.isEmpty(pass)){
-                code = DATA_EMPTY;
+                code = Error.DATA_EMPTY;
             }
             else if(!Pattern.matches(".*[0-9].*", pass)){
-                code = PASSWORD_DIGIT;
+                code = Error.PASSWORD_DIGIT;
             }
             else if(!Pattern.matches(".*[a-z].*",pass) || !Pattern.matches(".*[A-Z].*",pass)){
-                code = PASSWORD_UPPERLOWERCASE;
+                code = Error.PASSWORD_UPPERLOWERCASE;
             }
             else if(pass.length()<8){
-                code = PASSWORD_LENGTH;
+                code = Error.PASSWORD_LENGTH;
             }
 
             return code;

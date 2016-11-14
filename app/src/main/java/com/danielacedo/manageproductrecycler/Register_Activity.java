@@ -155,7 +155,7 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
      * OnClick method for the signUp button
      * @param view View that has been clicked
      */
-    private void signUp(View view){
+    public void signUp(View view){
 
         String user = edt_UserRegister.getText().toString();
         String pass = edt_PassRegister.getText().toString();

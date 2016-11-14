@@ -8,51 +8,41 @@ import android.widget.Toast;
 
 import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.interfaces.IRegisterMvp;
+import com.danielacedo.manageproductrecycler.interfaces.IValidateAccount;
+import com.danielacedo.manageproductrecycler.interfaces.IValidateUser;
+import com.danielacedo.manageproductrecycler.model.Error;
 import com.danielacedo.manageproductrecycler.preferences.AccountPreference;
 
 import java.util.regex.Pattern;
+
+;
 
 /**
  * Created by Daniel on 10/11/16.
  */
 
-public class RegisterPresenter implements IRegisterMvp.Presenter{
+public class RegisterPresenter implements IValidateUser.Presenter{
 
-    IRegisterMvp.View view;
+    IValidateUser.View view;
 
-    public RegisterPresenter(IRegisterMvp.View view){
+    public RegisterPresenter(IValidateUser.View view){
         this.view = view;
     }
 
     @Override
-    public void validateCredentials(String user, String pass, String confirmPass, String email, String confirmEmail, String province, String city, boolean isCompany, String companyName) {
-        if(TextUtils.isEmpty(user)) {
-            view.setMessageError(((Context) view).getResources().getString(R.string.err_emptyData), R.id.edt_UserRegister);
-        }
-        else if(TextUtils.isEmpty(pass)){
-            view.setMessageError(((Context) view).getResources().getString(R.string.err_emptyData), R.id.edt_PassRegister);
-        }
-        else if(!Pattern.matches(".*[0-9].*", pass)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_Digit), R.id.edt_PassRegister);
-        }
-        else if(!Pattern.matches(".*[a-z].*",pass) || !Pattern.matches(".*[A-Z].*",pass)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_UpperLowerCase), R.id.edt_PassRegister);
-        }
-        else if(pass.length()<8){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_Password_Length), R.id.edt_PassRegister);
-        }
-        else if(!pass.equals(confirmPass)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_passwordMismatch), R.id.edt_ConfirmPass);
-        }
-        else if(!Pattern.matches(Patterns.EMAIL_ADDRESS.pattern(), email)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_emailNotValid), R.id.edt_Email);
-        }
-        else if(!email.equals(confirmEmail)){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_emailMismatch), R.id.edt_ConfirmEmail);
-        }
-        else if(isCompany && companyName.equals("")){
-            view.setMessageError(((Context)view).getResources().getString(R.string.err_companyNameEmpty), R.id.edt_CompanyNameRegister);
-        }else{
+    public void validateCredentialsRegister(String user, String pass, String confirmPass, String email, String confirmEmail, String companyName, boolean isCompany) {
+
+        int validateUser = IValidateAccount.Presenter.validateCredentialsUser(user);
+        int validatePassword = IValidateAccount.Presenter.validateCredentialsPassword(pass);
+        int validateConfirmPassword = IValidateUser.Presenter.validateCredentialsConfirmPassword(pass, confirmPass);
+        int validateEmail = IValidateUser.Presenter.validateCredentialsEmail(email);
+        int validateConfirmEmail = IValidateUser.Presenter.validateCredentialsConfirmEmail(email, confirmEmail);
+        int validateCompanyName = IValidateUser.Presenter.validateCredentialsCompanyName(companyName, isCompany);
+
+        //TODO FINISH THIS MESS
+
+
+        else{
             AccountPreference accountPreference = AccountPreference.getInstance((Context)view);
             accountPreference.putUser(user);
             accountPreference.putPassword(pass);

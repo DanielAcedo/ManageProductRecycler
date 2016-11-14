@@ -10,10 +10,13 @@ import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.Register_Activity;
 import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
 import com.danielacedo.manageproductrecycler.interfaces.IValidateAccount;
+import com.danielacedo.manageproductrecycler.model.Error;
 import com.danielacedo.manageproductrecycler.model.User;
+import com.danielacedo.manageproductrecycler.utils.ErrorMapUtils;
 
 import static com.danielacedo.manageproductrecycler.interfaces.IValidateAccount.Presenter.*;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -27,9 +30,11 @@ import java.util.regex.Pattern;
 public class LoginPresenter implements IValidateAccount.Presenter {
 
     private IValidateAccount.View view;
+    private Context context;
 
     public LoginPresenter(IValidateAccount.View view){
         this.view = view;
+        context = (Context)view;
     }
 
     @Override
@@ -38,36 +43,39 @@ public class LoginPresenter implements IValidateAccount.Presenter {
         int validateUser = validateCredentialsUser(user);
         int validatePassword = validateCredentialsPassword(password);
 
-        boolean userOk = validateUser == IValidateAccount.OK;
-        boolean passOK = validatePassword == IValidateAccount.OK;
+        boolean userOk = validateUser == Error.OK;
+        boolean passOK = validatePassword == Error.OK;
 
 
         if (!userOk) {
-            view.setMessageError(switchErrorsMessage(validateUser), R.id.edt_User);
+            String nameResource = ErrorMapUtils.getErrorMap(context).get(validateUser);
+            view.setMessageError(nameResource, R.id.edt_User);
         }
         if(!passOK){
-            view.setMessageError(switchErrorsMessage(validatePassword), R.id.edt_Pass);
+            String nameResource = ErrorMapUtils.getErrorMap(context).get(validateUser);
+            view.setMessageError(nameResource, R.id.edt_Pass);
         }
         if(userOk && passOK){
             success(user, password);
         }
     }
 
+    //Previous method for getting error message based on error code
     public String switchErrorsMessage(int code){
 
         String message = "";
 
         switch(code){
-            case IValidateAccount.DATA_EMPTY:
+            case Error.DATA_EMPTY:
                 message = ((Context)view).getResources().getString(R.string.err_emptyData);
                 break;
-            case IValidateAccount.PASSWORD_DIGIT:
+            case Error.PASSWORD_DIGIT:
                 message = ((Context)view).getResources().getString(R.string.err_Password_Digit);
                 break;
-            case IValidateAccount.PASSWORD_UPPERLOWERCASE:
+            case Error.PASSWORD_UPPERLOWERCASE:
                 message = ((Context)view).getResources().getString(R.string.err_Password_UpperLowerCase);
                 break;
-            case IValidateAccount.PASSWORD_LENGTH:
+            case Error.PASSWORD_LENGTH:
                 message = ((Context)view).getResources().getString(R.string.err_Password_Length);
                 break;
         }
@@ -76,10 +84,8 @@ public class LoginPresenter implements IValidateAccount.Presenter {
     }
 
     public void success(String user, String pass){
-        //Save the user in the Application class
-        ((ListProduct_Application)((Context)view).getApplicationContext()).setUser(new User(user, pass));
-        Intent intent = new Intent((Context)view, Product_Activity.class);
-        ((Context) view).startActivity(intent);
+        Intent intent = new Intent(context, Product_Activity.class);
+        view.startActivity(intent);
     }
 
 }

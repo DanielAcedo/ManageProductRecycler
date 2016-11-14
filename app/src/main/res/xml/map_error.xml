@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<map linked="true">
+    <entry key="10">err_Password_Digit</entry>
+    <entry key="11">err_Password_UpperLowerCase</entry>
+    <entry key="12">err_Password_Length</entry>
+    <entry key="13">err_emptyData</entry>
+</map>

@@ -3,6 +3,7 @@ package com.danielacedo.manageproductrecycler;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,6 +29,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
     private EditText edt_User, edt_Pass;
     private Button btn_Login, btn_Register;
     private TextInputLayout til_User, til_Pass;
+    private ViewGroup layout;
 
     private final String TAG = "loginrelative";
 
@@ -35,6 +38,8 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
         super.onCreate(savedInstanceState);
         setContentView(activity_login_);
         loginMvp = new LoginPresenter(this); // Presenter has a reference to the view
+
+        layout = (ViewGroup) findViewById(R.id.activity_login_);
 
         edt_User = (EditText)findViewById(R.id.edt_User);
         edt_User.addTextChangedListener(new TextWatcher() {
@@ -118,22 +123,28 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
 
     /**
      * Sends an order to the view to display a message error
-     * @param messageError The message to be displayed
+     * @param nameResource Name of the string resource to be displayed
      * @author Daniel Acedo Calderón
      */
     @Override
-    public void setMessageError(String messageError, int view) {
-        //Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
+    public void setMessageError(String nameResource, int view) {
+        //Get resource which name is
+        String messageError = getResources().getString(
+                getResources().getIdentifier(nameResource, "string", getPackageName()));
 
         switch (view){
-            case R.id.edt_User:
-                til_User.setError(messageError);
+            case R.id.til_User:
+                //til_User.setError(messageError);
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_INDEFINITE).show();
                 break;
-            case R.id.edt_Pass:
-                til_Pass.setError(messageError);
+            case R.id.til_Password:
+                //til_Pass.setError(messageError);
+                Snackbar.make(layout, messageError, Snackbar.LENGTH_INDEFINITE).show();
                 break;
         }
     }
+
+
 
     private void checkUserPreference(){
 

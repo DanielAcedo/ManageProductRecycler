@@ -8,24 +8,22 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
-import com.danielacedo.manageproductrecycler.interfaces.IRegisterMvp;
+import com.danielacedo.manageproductrecycler.interfaces.IValidateUser;
 import com.danielacedo.manageproductrecycler.presenter.RegisterPresenter;
 
 /**
  * Activity used for registering new users
  * @author Daniel Acedo Calderón
  */
-public class Register_Activity extends AppCompatActivity  implements IRegisterMvp.View{
+public class Register_Activity extends AppCompatActivity  implements IValidateUser.View{
 
-    IRegisterMvp.Presenter presenter;
+    RegisterPresenter presenter;
 
     private Spinner spProvince;
     private Spinner spCity;
@@ -162,12 +160,10 @@ public class Register_Activity extends AppCompatActivity  implements IRegisterMv
         String confirmPass = edt_ConfirmPass.getText().toString();
         String email = edt_Email.getText().toString();
         String confirmEmail = edt_ConfirmEmail.getText().toString();
-        String province = spProvince.getSelectedItem().toString();
-        String city = spCity.getSelectedItem().toString();
         boolean isCompany = rg_typeClient.getCheckedRadioButtonId() == R.id.rb_Company;
         String companyName =  isCompany ? edt_CompanyNameRegister.getText().toString() : "";
 
-        presenter.validateCredentials(user, pass, confirmPass, email, confirmEmail, province, city, isCompany, companyName);
+        presenter.validateCredentials(user, pass, confirmPass, email, confirmEmail, companyName, isCompany);
     }
 
     @Override

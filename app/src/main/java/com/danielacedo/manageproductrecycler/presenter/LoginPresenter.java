@@ -38,7 +38,7 @@ public class LoginPresenter implements IValidateAccount.Presenter {
     }
 
     @Override
-    public void validateCredentialsLogin(String user, String password) {
+    public void validateCredentials(String user, String password) {
 
         int validateUser = validateCredentialsUser(user);
         int validatePassword = validateCredentialsPassword(password);

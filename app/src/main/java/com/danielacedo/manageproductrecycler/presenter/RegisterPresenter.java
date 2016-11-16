@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * Created by Daniel on 10/11/16.
  */
 
-public class RegisterPresenter implements IValidateUser.Presenter{
+public class RegisterPresenter implements IValidateUser.PresenterUser{
 
     IValidateUser.View view;
 
@@ -29,15 +29,17 @@ public class RegisterPresenter implements IValidateUser.Presenter{
         this.view = view;
     }
 
+
+
     @Override
-    public void validateCredentialsRegister(String user, String pass, String confirmPass, String email, String confirmEmail, String companyName, boolean isCompany) {
+    public void validateCredentials(String user, String pass, String confirmPass, String email, String confirmEmail, String companyName, boolean isCompany) {
 
         int validateUser = IValidateAccount.Presenter.validateCredentialsUser(user);
         int validatePassword = IValidateAccount.Presenter.validateCredentialsPassword(pass);
-        int validateConfirmPassword = IValidateUser.Presenter.validateCredentialsConfirmPassword(pass, confirmPass);
-        int validateEmail = IValidateUser.Presenter.validateCredentialsEmail(email);
-        int validateConfirmEmail = IValidateUser.Presenter.validateCredentialsConfirmEmail(email, confirmEmail);
-        int validateCompanyName = IValidateUser.Presenter.validateCredentialsCompanyName(companyName, isCompany);
+        int validateConfirmPassword = IValidateUser.PresenterUser.validateCredentialsConfirmPassword(pass, confirmPass);
+        int validateEmail = IValidateUser.PresenterUser.validateCredentialsEmail(email);
+        int validateConfirmEmail = IValidateUser.PresenterUser.validateCredentialsConfirmEmail(email, confirmEmail);
+        int validateCompanyName = IValidateUser.PresenterUser.validateCredentialsCompanyName(companyName, isCompany);
 
         //TODO FINISH THIS MESS
 

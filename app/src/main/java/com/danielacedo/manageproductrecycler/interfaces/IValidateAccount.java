@@ -44,7 +44,7 @@ public interface IValidateAccount {
      */
     interface Presenter{
 
-        void validateCredentialsLogin(String user, String pass);
+        void validateCredentials(String user, String pass);
 
         static int validateCredentialsUser(String user){
             int code = OK;

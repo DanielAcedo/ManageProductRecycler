@@ -14,7 +14,7 @@ public interface IValidateUser extends IValidateAccount {
 
     int EMAIL_INVALID = 14;
 
-    interface Presenter{
+    interface PresenterUser{
         static int validateCredentialsEmail(String email){
 
             int code = Error.OK;
@@ -56,8 +56,8 @@ public interface IValidateUser extends IValidateAccount {
             return code;
         }
 
-        void validateCredentialsRegister(String user, String password, String confirmPassword, String email,
-                                                String confirmEmail, String companyname, boolean isCompany);
+        void validateCredentials(String user, String password, String confirmPassword, String email,
+                                 String confirmEmail, String companyname, boolean isCompany);
 
     }
 }

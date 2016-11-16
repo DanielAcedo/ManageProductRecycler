@@ -1,6 +1,5 @@
 package com.danielacedo.manageproductrecycler;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
@@ -10,12 +9,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.danielacedo.manageproductrecycler.interfaces.ILoginMvp;
 import com.danielacedo.manageproductrecycler.interfaces.IValidateAccount;
 import com.danielacedo.manageproductrecycler.model.User;
 import com.danielacedo.manageproductrecycler.preferences.AccountPreference;
@@ -81,7 +78,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
         til_Pass = (TextInputLayout)findViewById(R.id.til_Password);
         btn_Login = (Button)findViewById(R.id.btn_Login);
         btn_Login.setOnClickListener((v) -> {
-            loginMvp.validateCredentialsLogin(edt_User.getText().toString(), edt_Pass.getText().toString());
+            loginMvp.validateCredentials(edt_User.getText().toString(), edt_Pass.getText().toString());
         });
 
         btn_Register = (Button)findViewById(R.id.btn_Register);

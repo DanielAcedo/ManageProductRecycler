@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
 
         layout = (ViewGroup) findViewById(R.id.activity_login_);
 
-        edt_User = (EditText)findViewById(R.id.edt_User);
+        edt_User = (EditText) findViewById(R.id.edt_User);
         edt_User.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,7 +57,7 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
             }
         });
 
-        edt_Pass = (EditText)findViewById(R.id.edt_Pass);
+        edt_Pass = (EditText) findViewById(R.id.edt_Pass);
         edt_Pass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -74,24 +75,31 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
             }
         });
 
-        til_User = (TextInputLayout)findViewById(R.id.til_User);
-        til_Pass = (TextInputLayout)findViewById(R.id.til_Password);
-        btn_Login = (Button)findViewById(R.id.btn_Login);
-        btn_Login.setOnClickListener((v) -> {
-            loginMvp.validateCredentials(edt_User.getText().toString(), edt_Pass.getText().toString());
+        til_User = (TextInputLayout) findViewById(R.id.til_User);
+        til_Pass = (TextInputLayout) findViewById(R.id.til_Password);
+        btn_Login = (Button) findViewById(R.id.btn_Login);
+        btn_Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginMvp.validateCredentials(edt_User.getText().toString(), edt_Pass.getText().toString());
+            }
         });
 
-        btn_Register = (Button)findViewById(R.id.btn_Register);
-        btn_Register.setOnClickListener((v)->{
-            openRegisterActivity();
+        btn_Register = (Button) findViewById(R.id.btn_Register);
+        btn_Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRegisterActivity();
+            }
+
         });
 
         Typeface font = Typeface.createFromAsset(getAssets(), "sun.ttf");
         edt_User.setTypeface(font);
 
         //Check user persistence
-        User user = ((ListProduct_Application)getApplicationContext()).getUser();
-        if(user != null){
+        User user = ((ListProduct_Application) getApplicationContext()).getUser();
+        if (user != null) {
             Log.d(TAG, user.getUser());
         }
 
@@ -145,8 +153,8 @@ public class Login_Activity extends AppCompatActivity implements IValidateAccoun
 
     private void checkUserPreference(){
 
-        String user = AccountPreference.getInstance(Login_Activity.this).readUser();
-        String password = AccountPreference.getInstance(Login_Activity.this).readPassword();
+        String user = ((AccountPreference)AccountPreference.getInstance(Login_Activity.this)).readUser();
+        String password = ((AccountPreference)AccountPreference.getInstance(Login_Activity.this)).readPassword();
 
         if (!user.equals("") && !password.equals("")){
             edt_User.setText(user);

@@ -166,26 +166,36 @@ public class Register_Activity extends AppCompatActivity  implements IValidateUs
         presenter.validateCredentials(user, pass, confirmPass, email, confirmEmail, companyName, isCompany);
     }
 
+    /**
+     * Shows a custom message depending on the error that happened during data validation
+     * @param errorResource The message to be displayed
+     *                     use {@link android.content.res.Resources#getIdentifier(String, String, String)} for obtaining the id
+     * @param view View in which the message will be shown
+     * @link #getInden
+     */
     @Override
-    public void setMessageError(String messageError, int view) {
+    public void setMessageError(String errorResource, int view) {
+
+        String message = getResources().getString(getResources().getIdentifier(errorResource, "string", getPackageName()));
+
         switch(view){
             case R.id.edt_UserRegister:
-                displayAndScrollErrorOnEditText(messageError, edt_UserRegister);
+                displayAndScrollErrorOnEditText(message, edt_UserRegister);
                 break;
             case R.id.edt_PassRegister:
-                displayAndScrollErrorOnEditText(messageError, edt_PassRegister);
+                displayAndScrollErrorOnEditText(message, edt_PassRegister);
                 break;
             case R.id.edt_ConfirmPass:
-                displayAndScrollErrorOnEditText(messageError, edt_ConfirmPass);
+                displayAndScrollErrorOnEditText(message, edt_ConfirmPass);
                 break;
             case R.id.edt_Email:
-                displayAndScrollErrorOnEditText(messageError, edt_Email);
+                displayAndScrollErrorOnEditText(message, edt_Email);
                 break;
             case R.id.edt_ConfirmEmail:
-                displayAndScrollErrorOnEditText(messageError, edt_ConfirmEmail);
+                displayAndScrollErrorOnEditText(message, edt_ConfirmEmail);
                 break;
             case R.id.edt_CompanyNameRegister:
-                displayAndScrollErrorOnEditText(messageError, edt_CompanyNameRegister);
+                displayAndScrollErrorOnEditText(message, edt_CompanyNameRegister);
                 break;
 
         }

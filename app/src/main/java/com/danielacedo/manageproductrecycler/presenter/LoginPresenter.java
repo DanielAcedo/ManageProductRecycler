@@ -14,8 +14,6 @@ import com.danielacedo.manageproductrecycler.model.Error;
 import com.danielacedo.manageproductrecycler.model.User;
 import com.danielacedo.manageproductrecycler.utils.ErrorMapUtils;
 
-import static com.danielacedo.manageproductrecycler.interfaces.IValidateAccount.Presenter.*;
-
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -52,12 +50,43 @@ public class LoginPresenter implements IValidateAccount.Presenter {
             view.setMessageError(nameResource, R.id.edt_User);
         }
         if(!passOK){
-            String nameResource = ErrorMapUtils.getErrorMap(context).get(validateUser);
+            String nameResource = ErrorMapUtils.getErrorMap(context).get(validatePassword);
             view.setMessageError(nameResource, R.id.edt_Pass);
         }
         if(userOk && passOK){
             success(user, password);
         }
+    }
+
+    @Override
+    public int validateCredentialsUser(String user) {
+        int code = Error.OK;
+
+        if(TextUtils.isEmpty(user)) {
+            code = Error.DATA_EMPTY;
+        }
+
+        return code;
+    }
+
+    @Override
+    public int validateCredentialsPassword(String pass) {
+        int code = Error.OK;
+
+        if(TextUtils.isEmpty(pass)){
+            code = Error.DATA_EMPTY;
+        }
+        else if(!Pattern.matches(".*[0-9].*", pass)){
+            code = Error.PASSWORD_DIGIT;
+        }
+        else if(!Pattern.matches(".*[a-z].*",pass) || !Pattern.matches(".*[A-Z].*",pass)){
+            code = Error.PASSWORD_UPPERLOWERCASE;
+        }
+        else if(pass.length()<8){
+            code = Error.PASSWORD_LENGTH;
+        }
+
+        return code;
     }
 
     //Previous method for getting error message based on error code

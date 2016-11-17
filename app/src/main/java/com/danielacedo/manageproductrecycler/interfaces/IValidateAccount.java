@@ -46,18 +46,22 @@ public interface IValidateAccount {
 
         void validateCredentials(String user, String pass);
 
-        static int validateCredentialsUser(String user){
-            int code = OK;
+        int validateCredentialsUser(String user);
+
+        int validateCredentialsPassword(String pass);
+
+        /*static int validateCredentialsUser(String user){
+            int code = Error.OK;
 
             if(TextUtils.isEmpty(user)) {
-                code = DATA_EMPTY;
+                code = Error.DATA_EMPTY;
             }
 
             return code;
 
-        }
+        }*/
 
-        static int validateCredentialsPassword(String pass){
+        /*static int validateCredentialsPassword(String pass){
 
             int code = Error.OK;
 
@@ -75,6 +79,6 @@ public interface IValidateAccount {
             }
 
             return code;
-        }
+        }*/
     }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.danielacedo.manageproductrecycler.interfaces.IPreferences;
+import com.danielacedo.manageproductrecycler.interfaces.IValidateAccount;
 
 /**
  * Created by Daniel on 10/11/16.
@@ -12,7 +13,7 @@ import com.danielacedo.manageproductrecycler.interfaces.IPreferences;
 
 public class AccountPreference implements IPreferences{
 
-    private static AccountPreference instance;
+    private static IPreferences instance;
     private Context context;
 
     public static final String FILE = "com.danielacedo.manageproductrecycler_preferences";
@@ -29,7 +30,7 @@ public class AccountPreference implements IPreferences{
     }
 
     //Singleton
-    public static AccountPreference getInstance(Context context){
+    public static IPreferences getInstance(Context context){
         if(instance == null){
             instance = new AccountPreference(context);
         }

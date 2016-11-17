@@ -15,7 +15,23 @@ public interface IValidateUser extends IValidateAccount {
     int EMAIL_INVALID = 14;
 
     interface PresenterUser{
-        static int validateCredentialsEmail(String email){
+
+        void validateCredentials(String user, String password, String confirmPassword, String email,
+                                 String confirmEmail, String companyname, boolean isCompany);
+
+        int validateCredentialsUser(String user);
+
+        int validateCredentialsPassword(String pass);
+
+        int validateCredentialsEmail(String email);
+
+        int validateCredentialsConfirmEmail(String email,String confirmEmail);
+
+        int validateCredentialsConfirmPassword(String password, String confirmPassword);
+
+        int validateCredentialsCompanyName(String companyName, boolean isCompany);
+
+        /*static int validateCredentialsEmail(String email){
 
             int code = Error.OK;
 
@@ -24,9 +40,9 @@ public interface IValidateUser extends IValidateAccount {
             }
 
             return code;
-        }
+        }*/
 
-        static int validateCredentialsConfirmEmail(String email, String confirmEmail){
+        /*static int validateCredentialsConfirmEmail(String email, String confirmEmail){
             int code = Error.OK;
 
             if(!email.equals(confirmEmail)){
@@ -34,9 +50,9 @@ public interface IValidateUser extends IValidateAccount {
             }
 
             return code;
-        }
+        }*/
 
-        static int validateCredentialsConfirmPassword(String pass, String confirmPassword){
+        /*static int validateCredentialsConfirmPassword(String pass, String confirmPassword){
             int code = Error.OK;
 
             if(!pass.equals(confirmPassword)){
@@ -44,9 +60,9 @@ public interface IValidateUser extends IValidateAccount {
             }
 
             return code;
-        }
+        }*/
 
-        static int validateCredentialsCompanyName(String companyName, boolean isCompany){
+        /*static int validateCredentialsCompanyName(String companyName, boolean isCompany){
             int code = Error.OK;
 
             if(isCompany && companyName.equals("")) {
@@ -54,10 +70,8 @@ public interface IValidateUser extends IValidateAccount {
             }
 
             return code;
-        }
+        }*/
 
-        void validateCredentials(String user, String password, String confirmPassword, String email,
-                                 String confirmEmail, String companyname, boolean isCompany);
 
     }
 }

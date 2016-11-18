@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.danielacedo.manageproductrecycler.interfaces.IAddProductMvp;
+import com.danielacedo.manageproductrecycler.interfaces.IProduct;
+import com.danielacedo.manageproductrecycler.model.Product;
 import com.danielacedo.manageproductrecycler.presenter.ManageProductPresenter;
 
 /**
@@ -14,6 +16,8 @@ import com.danielacedo.manageproductrecycler.presenter.ManageProductPresenter;
  * @author Daniel Acedo Calderón
  */
 public class ManageProduct_Activity extends AppCompatActivity implements IAddProductMvp.View{
+
+    public static final String PRODUCT_RESULT_KEY = "productResult";
 
     IAddProductMvp.Presenter presenter;
     EditText edt_Name, edt_Description, edt_Price, edt_Brand, edt_Dosage, edt_Stock, edt_Image;
@@ -46,6 +50,28 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
 
             }
         });
+
+        checkIntent();
+    }
+
+    private void checkIntent(){
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null){
+            Product product = (Product) bundle.getSerializable(IProduct.PRODUCT_KEY);
+            if(product != null){
+                edt_Name.setText(product.getName());
+                edt_Description.setText(product.getDescription());
+                edt_Price.setText(String.valueOf(product.getPrice()));
+                edt_Brand.setText(product.getBrand());
+                edt_Stock.setText(String.valueOf(product.getStock()));
+                edt_Dosage.setText(product.getDosage());
+                edt_Image.setText(String.valueOf(product.getImage()));
+            }
+        }
+
+
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.danielacedo.manageproductrecycler.model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.UUID;
 
@@ -11,7 +12,7 @@ import java.util.UUID;
  * Model class representing a pharmaceutical product
  * @author Daniel Acedo Calderón
  */
-public class Product implements Comparable<Product> {
+public class Product implements Comparable<Product>, Serializable{
     private String id;
     private String name;
     private String description;

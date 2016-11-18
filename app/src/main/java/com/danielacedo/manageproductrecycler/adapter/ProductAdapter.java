@@ -1,7 +1,6 @@
 package com.danielacedo.manageproductrecycler.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,74 +13,99 @@ import com.danielacedo.manageproductrecycler.ListProduct_Application;
 import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.model.Product;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by Daniel on 21/10/16.
+ * Created by usuario on 18/11/16.
  */
+
 
 /**
- * Custom adapter for displaying Products using a custom View. Correct solution.
- * @author Daniel Acedo Calderón
+ * It isn't necessary to call notifyDataSetChanged() when we use ArrayAdapter's default add, delete... methods
  */
+
 public class ProductAdapter extends ArrayAdapter<Product> {
 
-    public ProductAdapter(Context context) {
-        super(context, R.layout.item_product, ((ListProduct_Application)context.getApplicationContext()).getProducts());
+    private boolean isAlphabeticallyAscendant;
+
+    /**
+     * We pass a new ArrayList containing the objects from the repository to obtain a local copy
+     * @param context
+     */
+    public ProductAdapter(Context context){
+        super(context, R.layout.item_product, new ArrayList<Product>(
+                ((ListProduct_Application)context.getApplicationContext()).getProducts())
+        );
+
+        isAlphabeticallyAscendant = false;
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View item = convertView;
-        ProductHolder productHolder;
+        View v = convertView;
+        ProductHolder holder = null;
 
-        if(item == null){
-            //1. Create the LayoutInflater
-            //LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-            LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            productHolder = new ProductHolder();
+        if(v == null){
+            holder = new ProductHolder();
 
-            //2. Inflate the view. Create in memory the View object that contains the widgets
-            item = layoutInflater.inflate(R.layout.item_product, null);
-            //3. Search for the widgets in the just created view
-            productHolder.imv_listProduct_Image = (ImageView) item.findViewById(R.id.imv_listProduct_Image);
-            productHolder.txv_listProduct_Name = (TextView) item.findViewById(R.id.txv_listProduct_Name);
-            productHolder.txv_listProduct_Price = (TextView) item.findViewById(R.id.txv_listProduct_Price);
-            productHolder.txv_listProduct_Stock = (TextView) item.findViewById(R.id.txv_listProduct_Stock);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.item_product, null);
 
-            item.setTag(productHolder);
+            holder.imv_listProduct_Image = (ImageView)v.findViewById(R.id.imv_listProduct_Image);
+            holder.txv_listProduct_Name = (TextView)v.findViewById(R.id.txv_listProduct_Name);
+            holder.txv_listProduct_Price = (TextView)v.findViewById(R.id.txv_listProduct_Price);
+            holder.txv_listProduct_Stock = (TextView)v.findViewById(R.id.txv_listProduct_Stock);
+
+            v.setTag(holder);
+
         }else{
-            productHolder = (ProductHolder)item.getTag();
+            holder = (ProductHolder) v.getTag();
         }
 
-        //4. Assign display info to widgets
-        productHolder.imv_listProduct_Image.setImageResource(getItem(position).getImage());
-        productHolder.txv_listProduct_Name.setText(getItem(position).getName());
-        productHolder.txv_listProduct_Price.setText(String.valueOf(getItem(position).getPrice()));
-        productHolder.txv_listProduct_Stock.setText(String.valueOf(getItem(position).getStock()));
+        holder.imv_listProduct_Image.setImageResource(getItem(position).getImage());
+        holder.txv_listProduct_Name.setText(getItem(position).getName());
+        holder.txv_listProduct_Stock.setText(String.valueOf(getItem(position).getStock()));
+        holder.txv_listProduct_Price.setText(String.valueOf(getItem(position).getPrice()));
 
-        if(position%2==0){
-            item.setBackgroundColor(Color.RED);
-        }else{
-            item.setBackgroundColor(Color.WHITE);
+        return v;
+    }
+
+    public void getAlphabeticallySortedProducts(){
+        Comparator<Product> comparator = isAlphabeticallyAscendant ? Product.NAME_ASCENDANT_COMPARATOR
+                : Product.NAME_DESCENDANT_COMPARATOR;
+
+        isAlphabeticallyAscendant = !isAlphabeticallyAscendant;
+
+        sort(comparator);
+    }
+
+    public void addProduct(Product product) {
+        add(product);
+    }
+
+    public void editProduct(Product product) {
+        searchProductById(product.getId())
+    }
+
+    private int searchProductById(String id){
+        int position = -1;
+
+        for(int i = 0; i < getCount(); i++){
+            if(getItem(i).getId().equals(id)){
+                position = i;
+                break;
+            }
         }
 
-        return item;
-
+        return position;
     }
 
-
-    public void getAllProducts(List<Product> productList){
-
-    }
-
-    /**
-     * Inner class that contains the widgets from the XML file
-     * @author Daniel Acedo Calderón
-     */
     static class ProductHolder{
         ImageView imv_listProduct_Image;
         TextView txv_listProduct_Name, txv_listProduct_Price, txv_listProduct_Stock;
     }
+
+
 }

@@ -208,6 +208,7 @@ public class Register_Activity extends AppCompatActivity  implements IValidateUs
      */
     private void displayAndScrollErrorOnEditText(String messageError, EditText view){
         view.setError(messageError);    //Sets message error
+
         view.getParent().requestChildFocus(view, view); //Scrolls the scrollview to the view
         if(view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);   //Focus on the view to make the message error visible

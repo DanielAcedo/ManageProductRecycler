@@ -1,5 +1,7 @@
 package com.danielacedo.manageproductrecycler.interfaces;
 
+import com.danielacedo.manageproductrecycler.model.Product;
+
 /**
  * Created by Daniel on 20/10/16.
  */
@@ -36,6 +38,8 @@ public interface IAddProductMvp {
          * @param stock Stock of the product
          * @param image Image's id
          */
-        void validateProductFields(String name, String description, String brand, String dosage, String price, String stock, String image);
+        boolean validateProductFields(String name, String description, String brand, String dosage, String price, String stock, String image);
+
+        void validateProduct(Product product);
     }
 }

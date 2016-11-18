@@ -2,59 +2,47 @@ package com.danielacedo.manageproductrecycler;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
-import com.danielacedo.manageproductrecycler.adapter.ProductAdapter;
-import com.danielacedo.manageproductrecycler.interfaces.IProduct;
-import com.danielacedo.manageproductrecycler.model.Product;
+import com.danielacedo.manageproductrecycler.adapter.ProductAdapterRecycler;
 
 /**
  * Activity inherating from ListActivity that displays all the products in out Applicationś List
  * @author Daniel Acedo Calderón
  */
-public class Product_Activity extends AppCompatActivity {
+public class Product_Activity_Recycler extends AppCompatActivity {
     public final static int REQUEST_CODE_ADD_PRODUCT = 1; //Request code to start an Activity for adding products
     public final static int REQUEST_CODE_EDIT_PRODUCT = 2;
 
-    private ProductAdapter adapter;
-    private ListView lv_ListProduct;
+
+    private ProductAdapterRecycler adapter;
+    private RecyclerView rcv_Product;
     private FloatingActionButton fab_AddProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_);
+        setContentView(R.layout.activity_product_recycler);
 
         //Adapter
-        adapter = new ProductAdapter(this);
-        lv_ListProduct = (ListView) findViewById(R.id.lv_listProduct);
-        lv_ListProduct.setAdapter(adapter);
-        lv_ListProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(IProduct.PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
-
-                Intent intent = new Intent(Product_Activity.this, ManageProduct_Activity.class);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, REQUEST_CODE_EDIT_PRODUCT);
-            }
-        });
+        adapter = new ProductAdapterRecycler(this);
+        rcv_Product = (RecyclerView) findViewById(R.id.rcv_Product);
+        rcv_Product.setLayoutManager(new LinearLayoutManager(this));
+        rcv_Product.setAdapter(adapter);
 
         //FloatingActionButton
         fab_AddProduct = (FloatingActionButton) findViewById(R.id.fab_AddProduct);
         fab_AddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Product_Activity.this, ManageProduct_Activity.class);
+                Intent intent = new Intent(Product_Activity_Recycler.this, ManageProduct_Activity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADD_PRODUCT);
             }
         });
@@ -79,18 +67,18 @@ public class Product_Activity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_add_product:
-                intent = new Intent(Product_Activity.this, ManageProduct_Activity.class);
+                intent = new Intent(Product_Activity_Recycler.this, ManageProduct_Activity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADD_PRODUCT);
                 break;
             case R.id.action_sort_alphabetically:
                 adapter.getAlphabeticallySortedProducts();
                 break;
             case R.id.action_settings_general:
-                intent = new Intent(Product_Activity.this, GeneralSettings_Activity.class);
+                intent = new Intent(Product_Activity_Recycler.this, GeneralSettings_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.action_settings_account:
-                intent = new Intent(Product_Activity.this, AccountSettings_Activity.class);
+                intent = new Intent(Product_Activity_Recycler.this, AccountSettings_Activity.class);
                 startActivity(intent);
                 break;
         }
@@ -106,21 +94,8 @@ public class Product_Activity extends AppCompatActivity {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        switch (requestCode){
-            case REQUEST_CODE_ADD_PRODUCT:
-                if(resultCode == RESULT_OK){
-                    Product product = (Product) data.getSerializableExtra(IProduct.PRODUCT_KEY);
-                    ((ProductAdapter)lv_ListProduct.getAdapter()).addProduct(product);
-                }
-                break;
-
-            case REQUEST_CODE_EDIT_PRODUCT:
-                if(resultCode == RESULT_OK){
-                    Product product = (Product) data.getSerializableExtra(IProduct.PRODUCT_KEY);
-                    ((ProductAdapter)lv_ListProduct.getAdapter()).editProduct(product);
-                }
+        if(requestCode == REQUEST_CODE_ADD_PRODUCT && resultCode == Activity.RESULT_OK){ // For adding products
+            adapter.notifyDataSetChanged();
         }
-
     }
 }

@@ -4,11 +4,13 @@ package com.danielacedo.manageproductrecycler.model;
  * Created by Daniel on 6/10/16.
  */
 
+import java.io.Serializable;
+
 /**
  * Class that contains the user information to be stored
  * @author Daniel Acedo Calderón
  */
-public class User {
+public class User{
     private String user;
     private String password;
 

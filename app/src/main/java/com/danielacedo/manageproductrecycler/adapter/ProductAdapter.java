@@ -2,6 +2,7 @@ package com.danielacedo.manageproductrecycler.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,12 @@ import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by usuario on 18/11/16.
+ * Created by Daniel on 18/11/16.
  */
 
 
@@ -29,23 +31,56 @@ import java.util.List;
 public class ProductAdapter extends ArrayAdapter<Product> {
 
     private boolean isAlphabeticallyAscendant;
+    private List<Product> productList;
 
     /**
      * We pass a new ArrayList containing the objects from the repository to obtain a local copy
      * @param context
      */
     public ProductAdapter(Context context){
-        super(context, R.layout.item_product, ((ListProduct_Application)context.getApplicationContext()).getProducts()
-        );
+        super(context, R.layout.item_product);
 
+        productList = new ArrayList<Product>();
+        productList.addAll(((ListProduct_Application)context.getApplicationContext()).getProducts());
         isAlphabeticallyAscendant = false;
     }
 
 
     public void remove(int position) {
-        ((ListProduct_Application)getContext().getApplicationContext()).getProducts().remove(position);
+        productList.remove(position);
         notifyDataSetChanged();
 
+    }
+
+
+
+    @Nullable
+    @Override
+    public Product getItem(int position) {
+        return productList.get(position);
+    }
+
+    @Override
+    public void add(Product object) {
+        productList.add(object);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void remove(Product object) {
+        productList.remove(object);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void sort(Comparator<? super Product> comparator) {
+        Collections.sort(productList, comparator);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return productList.size();
     }
 
     @NonNull
@@ -103,6 +138,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         producto.setStock(product.getStock());
         producto.setImage(product.getImage());
 
+        notifyDataSetChanged();
     }
 
     public void removeById(String id){

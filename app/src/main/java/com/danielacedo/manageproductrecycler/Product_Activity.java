@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +17,8 @@ import android.widget.ListView;
 import com.danielacedo.manageproductrecycler.adapter.ProductAdapter;
 import com.danielacedo.manageproductrecycler.interfaces.IProduct;
 import com.danielacedo.manageproductrecycler.model.Product;
+
+import java.util.zip.Inflater;
 
 /**
  * Activity inherating from ListActivity that displays all the products in out Applicationś List
@@ -49,6 +53,8 @@ public class Product_Activity extends AppCompatActivity {
             }
         });
 
+        registerForContextMenu(lv_ListProduct);
+
         //FloatingActionButton
         fab_AddProduct = (FloatingActionButton) findViewById(R.id.fab_AddProduct);
         fab_AddProduct.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +67,38 @@ public class Product_Activity extends AppCompatActivity {
 
     }
 
+    /* Creates context menu */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater inflater = getMenuInflater();
+
+        switch (v.getId()){
+            case R.id.lv_listProduct:
+                inflater.inflate(R.menu.ctx_menu_product, menu);
+                break;
+        }
+    }
+
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.ctx_menu_product_delete:
+                adapter.remove(((AdapterView.AdapterContextMenuInfo)item.getMenuInfo()).position);
+                adapter.notifyDataSetChanged();
+                break;
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
     /*
-        Inflates menu in the activity
-     */
+                Inflates menu in the activity
+             */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_product, menu); //Inflates the menu resource in the menu object
@@ -111,14 +146,14 @@ public class Product_Activity extends AppCompatActivity {
             case REQUEST_CODE_ADD_PRODUCT:
                 if(resultCode == RESULT_OK){
                     Product product = (Product) data.getSerializableExtra(IProduct.PRODUCT_KEY);
-                    ((ProductAdapter)lv_ListProduct.getAdapter()).addProduct(product);
+                    adapter.addProduct(product);
                 }
                 break;
 
             case REQUEST_CODE_EDIT_PRODUCT:
                 if(resultCode == RESULT_OK){
                     Product product = (Product) data.getSerializableExtra(IProduct.PRODUCT_KEY);
-                    ((ProductAdapter)lv_ListProduct.getAdapter()).editProduct(product);
+                    adapter.editProduct(product);
                 }
         }
 

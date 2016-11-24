@@ -35,16 +35,22 @@ public class ProductAdapter extends ArrayAdapter<Product> {
      * @param context
      */
     public ProductAdapter(Context context){
-        super(context, R.layout.item_product, new ArrayList<Product>(
-                ((ListProduct_Application)context.getApplicationContext()).getProducts())
+        super(context, R.layout.item_product, ((ListProduct_Application)context.getApplicationContext()).getProducts()
         );
 
         isAlphabeticallyAscendant = false;
     }
 
+
+    public void remove(int position) {
+        ((ListProduct_Application)getContext().getApplicationContext()).getProducts().remove(position);
+        notifyDataSetChanged();
+
+    }
+
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         ProductHolder holder = null;
 
@@ -86,7 +92,27 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     }
 
     public void editProduct(Product product) {
-        searchProductById(product.getId())
+        int productPosition = searchProductById(product.getId());
+        Product producto = getItem(productPosition);
+
+        producto.setName(product.getName());
+        producto.setDescription(product.getDescription());
+        producto.setPrice(product.getPrice());
+        producto.setBrand(product.getBrand());
+        producto.setDosage(product.getDosage());
+        producto.setStock(product.getStock());
+        producto.setImage(product.getImage());
+
+    }
+
+    public void removeById(String id){
+        for(int i = 0; i < getCount(); i++){
+            if(getItem(i).getId().equals(id)){
+                Product product = getItem(i);
+                remove(product);
+                break;
+            }
+        }
     }
 
     private int searchProductById(String id){

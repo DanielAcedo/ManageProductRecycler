@@ -28,11 +28,6 @@ public class ManageProductPresenter implements IAddProductMvp.Presenter{
     }
 
     @Override
-    public void validateProduct(Product product) {
-
-    }
-
-    @Override
     public boolean validateProductFields(String name, String description, String brand, String dosage, String price, String stock, String image) {
 
         boolean ok = true;
@@ -67,13 +62,13 @@ public class ManageProductPresenter implements IAddProductMvp.Presenter{
         }
 
         else{
-            createAndReturnProduct(name, description, brand, dosage, price, stock, image);
-            ok = false;
+            ok = true;
         }
 
         return ok;
 
     }
+
 
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
 public class ListProduct_Application extends Application {
 
     private User user;
-    private ArrayList<Product> productList;
+    private List<Product> productList;
 
 
     @Override

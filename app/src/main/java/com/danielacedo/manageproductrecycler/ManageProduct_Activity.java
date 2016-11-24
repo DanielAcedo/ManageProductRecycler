@@ -1,5 +1,6 @@
 package com.danielacedo.manageproductrecycler;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,11 +24,14 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
     EditText edt_Name, edt_Description, edt_Price, edt_Brand, edt_Dosage, edt_Stock, edt_Image;
     Button btn_AddProduct;
 
+    boolean editing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_product_);
 
+        editing = false;
         presenter = new ManageProductPresenter(this);
 
         edt_Name = (EditText) findViewById(R.id.edt_Name);
@@ -42,16 +46,56 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
         btn_AddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.validateProductFields(edt_Name.getText().toString(), edt_Description.getText().toString(),
+                if (presenter.validateProductFields(edt_Name.getText().toString(), edt_Description.getText().toString(),
                             edt_Brand.getText().toString(), edt_Dosage.getText().toString(),
                             edt_Price.getText().toString(), edt_Stock.getText().toString(),
-                            edt_Image.getText().toString());
+                            edt_Image.getText().toString())){
+
+                    addResultProduct();
+                }
 
 
             }
         });
 
         checkIntent();
+    }
+
+    private void addResultProduct(){
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        Product product;
+
+        if(editing){
+            product = getEditProduct();
+            product.setName(edt_Name.getText().toString());
+            product.setBrand(edt_Brand.getText().toString());
+            product.setDescription(edt_Description.getText().toString());
+            product.setDosage(edt_Dosage.getText().toString());
+            product.setStock(Integer.parseInt(edt_Stock.getText().toString()));
+            product.setPrice(Double.parseDouble(edt_Price.getText().toString()));
+        }else{
+            product = new Product(edt_Name.getText().toString(), edt_Description.getText().toString(),
+                    Double.parseDouble(edt_Price.getText().toString()),
+                    edt_Brand.getText().toString(), edt_Dosage.getText().toString(), Integer.parseInt(edt_Stock.getText().toString()),
+                    R.drawable.weed);
+        }
+
+        bundle.putSerializable(IProduct.PRODUCT_KEY, product);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    private Product getEditProduct(){
+        Bundle bundle = getIntent().getExtras();
+        Product product = null;
+
+        if(bundle != null) {
+            product = (Product) bundle.getSerializable(IProduct.PRODUCT_KEY);
+        }
+
+        return product;
     }
 
     private void checkIntent(){
@@ -68,6 +112,8 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
                 edt_Stock.setText(String.valueOf(product.getStock()));
                 edt_Dosage.setText(product.getDosage());
                 edt_Image.setText(String.valueOf(product.getImage()));
+
+                editing = true;
             }
         }
 

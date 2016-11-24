@@ -40,6 +40,5 @@ public interface IAddProductMvp {
          */
         boolean validateProductFields(String name, String description, String brand, String dosage, String price, String stock, String image);
 
-        void validateProduct(Product product);
     }
 }

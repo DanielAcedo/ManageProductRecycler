@@ -32,6 +32,8 @@
     <string name="action_settings_general">Opciones</string>
     <string name="action_settings_account">Cuenta</string>
 
+    <string name="ctx_menu_product_delete">Borrar</string>
+
     <!-- AddProduct-->
     <string name="edt_Name">Nombre</string>
     <string name="edt_Description">Descripción</string>

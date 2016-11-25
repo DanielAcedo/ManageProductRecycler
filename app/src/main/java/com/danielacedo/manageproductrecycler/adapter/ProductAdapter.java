@@ -35,15 +35,16 @@ public class ProductAdapter extends ArrayAdapter<Product> {
      * @param context
      */
     public ProductAdapter(Context context){
-        super(context, R.layout.item_product, ((ListProduct_Application)context.getApplicationContext()).getProducts()
-        );
+        super(context, R.layout.item_product, new ArrayList<Product>(((ListProduct_Application)context.getApplicationContext()).getProducts()
+        ));
 
         isAlphabeticallyAscendant = false;
     }
 
 
     public void remove(int position) {
-        ((ListProduct_Application)getContext().getApplicationContext()).getProducts().remove(position);
+        Product product = getItem(position);
+        remove(product);
         notifyDataSetChanged();
 
     }

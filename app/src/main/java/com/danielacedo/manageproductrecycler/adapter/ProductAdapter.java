@@ -2,6 +2,7 @@ package com.danielacedo.manageproductrecycler.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,12 @@ import com.danielacedo.manageproductrecycler.R;
 import com.danielacedo.manageproductrecycler.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by usuario on 18/11/16.
+ * Created by Daniel on 18/11/16.
  */
 
 
@@ -46,8 +48,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         Product product = getItem(position);
         remove(product);
         notifyDataSetChanged();
-
     }
+
 
     @NonNull
     @Override
@@ -104,6 +106,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         producto.setStock(product.getStock());
         producto.setImage(product.getImage());
 
+        notifyDataSetChanged();
     }
 
     public void removeById(String id){

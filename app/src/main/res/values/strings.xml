@@ -43,5 +43,6 @@
     <string name="edt_Stock">Existencias</string>
     <string name="edt_Image">Imagen</string>
     <string name="btn_AddProduct">Añadir</string>
+    <string name="btn_AddProduct_Edit">Editar</string>
 
 </resources>

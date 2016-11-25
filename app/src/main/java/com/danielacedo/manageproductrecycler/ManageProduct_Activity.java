@@ -81,7 +81,7 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
                     R.drawable.weed);
         }
 
-        bundle.putSerializable(IProduct.PRODUCT_KEY, product);
+        bundle.putParcelable(IProduct.PRODUCT_KEY, product);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
@@ -92,7 +92,7 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
         Product product = null;
 
         if(bundle != null) {
-            product = (Product) bundle.getSerializable(IProduct.PRODUCT_KEY);
+            product = bundle.getParcelable(IProduct.PRODUCT_KEY);
         }
 
         return product;
@@ -103,7 +103,7 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
         Bundle bundle = getIntent().getExtras();
 
         if(bundle != null){
-            Product product = (Product) bundle.getSerializable(IProduct.PRODUCT_KEY);
+            Product product = bundle.getParcelable(IProduct.PRODUCT_KEY);
             if(product != null){
                 edt_Name.setText(product.getName());
                 edt_Description.setText(product.getDescription());
@@ -112,6 +112,8 @@ public class ManageProduct_Activity extends AppCompatActivity implements IAddPro
                 edt_Stock.setText(String.valueOf(product.getStock()));
                 edt_Dosage.setText(product.getDosage());
                 edt_Image.setText(String.valueOf(product.getImage()));
+
+                btn_AddProduct.setText(R.string.btn_AddProduct_Edit);
 
                 editing = true;
             }

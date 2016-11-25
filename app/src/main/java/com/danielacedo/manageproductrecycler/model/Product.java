@@ -1,5 +1,8 @@
 package com.danielacedo.manageproductrecycler.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.UUID;
@@ -12,7 +15,7 @@ import java.util.UUID;
  * Model class representing a pharmaceutical product
  * @author Daniel Acedo Calderón
  */
-public class Product implements Comparable<Product>, Serializable{
+public class Product implements Comparable<Product>, Parcelable{
     private String id;
     private String name;
     private String description;
@@ -60,6 +63,29 @@ public class Product implements Comparable<Product>, Serializable{
         this.stock = stock;
         this.image = image;
     }
+
+    protected Product(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        description = in.readString();
+        brand = in.readString();
+        dosage = in.readString();
+        price = in.readDouble();
+        stock = in.readInt();
+        image = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -150,5 +176,22 @@ public class Product implements Comparable<Product>, Serializable{
         }else{
             return this.getName().compareTo(o.getName());
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeString(brand);
+        dest.writeString(dosage);
+        dest.writeDouble(price);
+        dest.writeInt(stock);
+        dest.writeInt(image);
     }
 }

@@ -45,7 +45,7 @@ public class Product_Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IProduct.PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
+                bundle.putParcelable(IProduct.PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
 
                 Intent intent = new Intent(Product_Activity.this, ManageProduct_Activity.class);
                 intent.putExtras(bundle);
@@ -145,14 +145,14 @@ public class Product_Activity extends AppCompatActivity {
         switch (requestCode){
             case REQUEST_CODE_ADD_PRODUCT:
                 if(resultCode == RESULT_OK){
-                    Product product = (Product) data.getSerializableExtra(IProduct.PRODUCT_KEY);
+                    Product product = data.getParcelableExtra(IProduct.PRODUCT_KEY);
                     adapter.addProduct(product);
                 }
                 break;
 
             case REQUEST_CODE_EDIT_PRODUCT:
                 if(resultCode == RESULT_OK){
-                    Product product = (Product) data.getSerializableExtra(IProduct.PRODUCT_KEY);
+                    Product product = data.getParcelableExtra(IProduct.PRODUCT_KEY);
                     adapter.editProduct(product);
                 }
         }

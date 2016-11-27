@@ -50,6 +50,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         notifyDataSetChanged();
     }
 
+    @Override
+    public void remove(Product object) {
+        super.remove(object);
+    }
 
     @NonNull
     @Override
